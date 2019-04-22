@@ -42,9 +42,12 @@ class ProjectAdmin(admin.ModelAdmin):
 class GroupAdmin(admin.ModelAdmin):
     list_display = ('name', 'is_active', 'icon', 'email')
 
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'is_active', 'position')
+
 admin.site.register(Slider, SliderAdmin)
 admin.site.register(Slide, SlideAdmin)
-admin.site.register(Partner)
+admin.site.register(Partner, PartnerAdmin)
 admin.site.register(TeamMember, TeamMemberAdmin)
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Project, ProjectAdmin)
