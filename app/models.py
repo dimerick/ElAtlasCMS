@@ -123,6 +123,44 @@ class Group(models.Model):
 	
 	def __str__(self):
 		return self.name
+
+class Person(models.Model):
+	name = models.CharField(max_length=255, help_text='Please supply a name for this person')
+	group = models.ForeignKey(Group, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.name
+
+class Lider(models.Model):
+	group = models.ForeignKey(Group, on_delete=models.CASCADE)
+	person = models.ForeignKey(Person, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.name+"-"+self.person
+
+	class Meta:
+		unique_together = ('group', 'person')
+
+	class Meta:
+		verbose_name_plural = 'Lideres'
+
+class Category_Perception(models.Model):
+	name = models.CharField(max_length=255, help_text='Please supply a name for this Category')
+	description = models.TextField(help_text='Please supply a description for this Category')
+
+	def __str__(self):
+		return self.name
+
+class Perception(models.Model):
+	description = models.TextField(help_text='Please supply a description for this Perception')
+	person = models.ForeignKey(Person, on_delete=models.CASCADE)
+	cat_percep = models.ForeignKey(Category_Perception, on_delete=models.CASCADE)
+	geojson = models.TextField(blank=True, null=True, help_text='Please supply a geojson for this Perception')
+	location = models_gis.GeometryField(blank=True, null=True)
+
+	def __str__(self):
+		return self.cat_percep+"-"+self.person
+
 # class Text_Slide(models.Model):
 	
 	

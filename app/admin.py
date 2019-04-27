@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Slider, Slide, Partner, TeamMember, Activity, Project, Group
+from .models import Slider, Slide, Partner, TeamMember, Activity, Project, Group, Person, Lider, Category_Perception, Perception
 
 # Register your models here.
 class SliderAdmin(admin.ModelAdmin):
@@ -34,16 +34,28 @@ class TeamMemberAdmin(admin.ModelAdmin):
 	# 		'left_button'), 'is_active', 'position')
 
 class ActivityAdmin(admin.ModelAdmin):
-    list_display = ('name', 'is_active', 'date')
+    list_display = ('id', 'name', 'is_active', 'date')
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'is_active', 'position')
+    list_display = ('id', 'name', 'is_active', 'position')
 
 class GroupAdmin(admin.ModelAdmin):
-    list_display = ('name', 'is_active', 'icon', 'email')
+    list_display = ('id', 'name', 'is_active', 'icon', 'email')
 
 class PartnerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'is_active', 'position')
+    list_display = ('id', 'name', 'is_active', 'position')
+
+class PersonAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'group')
+
+class LiderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'group', 'person')
+
+class CategoryPerceptionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'description')
+
+class PerceptionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'person', 'cat_percep')
 
 admin.site.register(Slider, SliderAdmin)
 admin.site.register(Slide, SlideAdmin)
@@ -52,3 +64,7 @@ admin.site.register(TeamMember, TeamMemberAdmin)
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Group, GroupAdmin)
+admin.site.register(Person)
+admin.site.register(Lider)
+admin.site.register(Category_Perception)
+admin.site.register(Perception)
