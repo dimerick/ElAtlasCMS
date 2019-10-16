@@ -73,7 +73,7 @@ var controlSearchIniatilized = false;
 
         function getGroups(){
             jQuery.ajax({
-                url:   '/app/groups',
+                url:   '/app/perceptions',
                 type:  'get',
                 beforeSend: function () {
                     console.log("Procesando, espere por favor...");
@@ -98,27 +98,27 @@ var controlSearchIniatilized = false;
 //                        onEachFeature: eachSitio
 //                    }).addTo(map);
 
-                    // var groupsMap = L.Proj.geoJson(dataJson,{
-                    //     onEachFeature: eachGroup
-                    // });
+                    var groupsMap = L.Proj.geoJson(dataJson,{
+                        onEachFeature: eachGroup
+                    });
 
 
                     // var hondaMap = L.Proj.geoJson(honda,{
                     //     onEachFeature: eachHonda
                     // });
 //
-                     /*var markers = L.markerClusterGroup({
+                     var markers = L.markerClusterGroup({
                          iconCreateFunction: function(cluster) {
                              return L.divIcon({ html: '<div class="icon-map"><div>' + cluster.getChildCount() + '</div></div>' });
                          }
                      });
-                    markers.addLayer(groupsMap);*/
-                    /*map.addLayer(markers);*/
+                    markers.addLayer(groupsMap);
+                    map.addLayer(markers);
                     // map.addLayer(groupsMap);
                     // map.addLayer(hondaMap);
 
 
-                    /*setTimeout(function(){
+                    setTimeout(function(){
                         if(!controlSearchIniatilized){
                             // codigo para implementar la barra de busqueda
                             globalSearchControl = new L.Control.Search({
@@ -127,7 +127,7 @@ var controlSearchIniatilized = false;
                                 marker: false,
                                 moveToLocation: function(latlng, title, map) {
                                     var zoom = map.getBoundsZoom(L.latLngBounds([latlng,latlng]));
-//                                    console.log(zoom);
+                                  console.log(zoom);
                                     map.setView(latlng, zoom); // access the zoom
                                 }
                             });
@@ -150,7 +150,7 @@ var controlSearchIniatilized = false;
                         }
 
 
-                    }, 3300);*/
+                    }, 3300);
 
 
                 },
@@ -182,6 +182,7 @@ var controlSearchIniatilized = false;
                 var content = '<div class="content-info-marker">' + title +
                     '<ul>' +
                     '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.description+'</span></li>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.perception+'</span></li>' +
                     '</ul>';
                 if(feature.properties.image != null){
                     content = content + '<img src="'+feature.properties.image+'">';
