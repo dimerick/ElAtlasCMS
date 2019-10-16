@@ -159,7 +159,7 @@ class Perception(models.Model):
 	location = models_gis.GeometryField(blank=True, null=True)
 
 	def __str__(self):
-		return self.cat_percep+"-"+self.person
+		return str(self.cat_percep)+"-"+self.person
 
 # class Text_Slide(models.Model):
 	
