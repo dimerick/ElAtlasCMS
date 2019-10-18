@@ -130,6 +130,10 @@ var globalMarkers;
                         onEachFeature: eachGroup
                     });
 
+                    var hondaMap = L.Proj.geoJson(honda,{
+                        onEachFeature: eachHonda
+                    });
+
 
                     // var hondaMap = L.Proj.geoJson(honda,{
                     //     onEachFeature: eachHonda
@@ -145,6 +149,7 @@ var globalMarkers;
                     globalMarkers = markers;
                     markers.addLayer(groupsMap);
                     map.addLayer(markers);
+                    map.addLayer(hondaMap);
 
                     jQuery("#img-search-map").html("");
                     // map.addLayer(groupsMap);
