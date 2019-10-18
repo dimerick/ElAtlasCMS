@@ -1,2 +1,2 @@
-# BOSProjectCMS
-CMS BOSProject
+# ElAtlasCMS
+ElAtlasCMS

@@ -81,6 +81,7 @@ var controlSearchIniatilized = false;
                 success: function (data, textStatus, jqXHR){
                     // console.log(data);
                     // dataJson = JSON.parse(data);
+                    
                     dataJson = JSON.stringify(data);
                     dataJson = JSON.parse(dataJson);
                     console.log(dataJson);

@@ -33,7 +33,12 @@ def groups(request):
 	return JsonResponse(fc, safe=False)
 
 def perceptions(request):
-	perceptions = Perception.objects.all()
+	key_word = request.GET['key_word']
+	print(key_word)
+	if key_word != '':
+		perceptions = Perception.objects.filter(description__icontains=key_word)
+	else:
+		perceptions = Perception.objects.all()
 	fc = {"type":"FeatureCollection", "crs": {"type": "name", "properties": {"name": "EPSG:4326"}}, "features": []}
 	for percep in perceptions:
 		image = None

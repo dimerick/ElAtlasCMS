@@ -1,5 +1,8 @@
 
 var controlSearchIniatilized = false;
+var url_data = '/app/perceptions/?key_word';
+var globalGroupsMap;
+var globalMarkers;
         var numGroups = 0;
         //providers
         //   var providers = {};
@@ -63,6 +66,17 @@ var controlSearchIniatilized = false;
 
         L.control.iconLayers(layers).addTo(map);
 
+        jQuery("#button-search-map").click(
+            function(){
+                var word = jQuery("#text-search-map").val();
+                if(word == ''){
+                url_data = '/app/perceptions/?key_word';
+                }else{
+                url_data = '/app/perceptions/?key_word'+'='+word;
+                }
+                getGroups();
+            });
+
         //proj4.defs('EPSG:3116', '+proj=tmerc +lat_0=4.596200416666666 +lon_0=-74.07750791666666 +k=1 +x_0=1000000 +y_0=1000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
         proj4.defs('EPSG:4326', '+title=WGS 84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees');
 
@@ -71,16 +85,30 @@ var controlSearchIniatilized = false;
             'maxHeight' : 300
         };
 
+        jQuery("#searchtext9").keypress(function() {
+  console.log( "Handler for .keypress() called." );
+});
+        
         function getGroups(){
             jQuery.ajax({
-                url:   '/app/perceptions',
+                url:   url_data,
                 type:  'get',
                 beforeSend: function () {
+                    jQuery("#img-search-map").html("<img src=\"/static/images/loading.gif\">");
+                    
                     console.log("Procesando, espere por favor...");
                 },
                 success: function (data, textStatus, jqXHR){
                     // console.log(data);
                     // dataJson = JSON.parse(data);
+                    if (map.hasLayer(globalGroupsMap)){
+                        map.removeLayer(globalGroupsMap);
+                    }
+                     if (map.hasLayer(globalMarkers)){
+                         map.removeLayer(globalMarkers);
+                    }
+                    
+                   
                     dataJson = JSON.stringify(data);
                     dataJson = JSON.parse(dataJson);
                     console.log(dataJson);
@@ -112,19 +140,25 @@ var controlSearchIniatilized = false;
                              return L.divIcon({ html: '<div class="icon-map"><div>' + cluster.getChildCount() + '</div></div>' });
                          }
                      });
+
+                    globalGroupsMap = groupsMap;
+                    globalMarkers = markers;
                     markers.addLayer(groupsMap);
                     map.addLayer(markers);
+
+                    jQuery("#img-search-map").html("");
                     // map.addLayer(groupsMap);
                     // map.addLayer(hondaMap);
 
 
-                    setTimeout(function(){
+                    /*setTimeout(function(){
                         if(!controlSearchIniatilized){
                             // codigo para implementar la barra de busqueda
                             globalSearchControl = new L.Control.Search({
                                 layer: markers,
-                                propertyName: 'name',
+                                propertyName: 'perception',
                                 marker: false,
+                                initial: false,
                                 moveToLocation: function(latlng, title, map) {
                                     var zoom = map.getBoundsZoom(L.latLngBounds([latlng,latlng]));
                                   console.log(zoom);
@@ -143,6 +177,7 @@ var controlSearchIniatilized = false;
                                 });
 
                             }).on('search:collapsed', function(e) {
+                                console.log('collapsed');
                                 markers.refreshClusters();
                             });
                             map.addControl(globalSearchControl);  //inizialize search control
@@ -150,7 +185,7 @@ var controlSearchIniatilized = false;
                         }
 
 
-                    }, 3300);
+                    }, 3300);*/
 
 
                 },
