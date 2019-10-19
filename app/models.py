@@ -112,6 +112,7 @@ class Group(models.Model):
 	name = models.CharField(max_length=255, help_text='Please supply a name for this group')
 	email = models.EmailField(max_length=255, help_text='Please supply an email for this group')
 	description = models.TextField(help_text='Please supply a description for this group')
+	level = models.DecimalField(max_digits=5, decimal_places=1, default=0, blank=True, null=True, help_text='Level Group')
 	location = models_gis.PointField(blank=True, null=True)
 	lat = models_gis.CharField(help_text='Please supply a latitude for this group', max_length=255, default=None)
 	lon = models_gis.CharField(help_text='Please supply a longitude for this group', max_length=255, default=None)
