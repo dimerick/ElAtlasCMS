@@ -48,3 +48,21 @@ def perceptions(request):
 		f = {"type": "Feature", "geometry": {"type": "Point", "coordinates": coords}, "properties": {"name": percep.person.group.name, "email": percep.person.group.email, "description": percep.person.group.description, "icon": percep.person.group.icon, "image": image, "perception": percep.description}}
 		fc['features'].append(f)
 	return JsonResponse(fc, safe=False)
+
+def main_actors(request):
+	level = request.GET['level']
+	if level != '':
+		level = int(level)
+		grupos = Group.objects.filter(level__gte=level)
+	else:
+		grupos = Group.objects.all()
+	fc = {"type":"FeatureCollection", "crs": {"type": "name", "properties": {"name": "EPSG:4326"}}, "features": []}
+	for grupo in grupos:
+		image = None
+		if grupo.image != None:
+			image = grupo.image.url
+		#s.point.transform(3116)
+		coords = (grupo.location.coords[0], grupo.location.coords[1])
+		f = {"type": "Feature", "geometry": {"type": "Point", "coordinates": coords}, "properties": {"name": grupo.name, "email": grupo.email, "description": grupo.description, "level": grupo.level, "icon": grupo.icon, "image": image}}
+		fc['features'].append(f)
+	return JsonResponse(fc, safe=False)
