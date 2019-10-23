@@ -217,13 +217,13 @@ if(num >= 0 && num < 3){
         theClass = "div-icon color1";
         color = "#CEE3F6"
       }else if(num >= 3 && num < 5){
-        size = 14;
+        size = 20;
           theClass = "div-icon color2";
       }else if(num >= 5 && num < 7){
-          size = 15;
+          size = 30;
           theClass = "div-icon color3";
         }else if(num >= 7){
-        size = 16;
+        size = 40;
           theClass = "div-icon color4";
         }
                 
