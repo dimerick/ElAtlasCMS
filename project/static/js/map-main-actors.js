@@ -148,7 +148,7 @@ var globalMarkers;
                     globalGroupsMap = groupsMap;
                     globalMarkers = markers;
                     markers.addLayer(groupsMap);
-                    //map.addLayer(markers);
+                    map.addLayer(groupsMap);
                     map.addLayer(hondaMap);
 
                     jQuery("#img-search-map").html("");
