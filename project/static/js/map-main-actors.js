@@ -148,7 +148,7 @@ var globalMarkers;
                     globalGroupsMap = groupsMap;
                     globalMarkers = markers;
                     markers.addLayer(groupsMap);
-                    map.addLayer(markers);
+                    //map.addLayer(markers);
                     map.addLayer(hondaMap);
 
                     jQuery("#img-search-map").html("");
@@ -229,7 +229,7 @@ if(num >= 0 && num < 3){
                 
                 var myIcon = L.divIcon({
           className: theClass,
-          html: feature.properties.num,
+          html: feature.properties.level,
           iconSize: [size, size],
           iconAnchor: [5, 5]
 
