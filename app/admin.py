@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Slider, Slide, Partner, TeamMember, Activity, Project, Group, Person, Lider, Category_Perception, Perception
+from .models import Slider, Slide, Partner, TeamMember, Activity, Project, Group, Person, Lider, Category_Perception, Perception, Category_Espatial_Object, Espatial_Object
 
 # Register your models here.
 class SliderAdmin(admin.ModelAdmin):
@@ -57,6 +57,8 @@ class CategoryPerceptionAdmin(admin.ModelAdmin):
 class PerceptionAdmin(admin.ModelAdmin):
     list_display = ('id', 'person', 'cat_percep')
 
+
+
 admin.site.register(Slider, SliderAdmin)
 admin.site.register(Slide, SlideAdmin)
 admin.site.register(Partner, PartnerAdmin)
@@ -68,3 +70,5 @@ admin.site.register(Person)
 admin.site.register(Lider)
 admin.site.register(Category_Perception)
 admin.site.register(Perception)
+admin.site.register(Category_Espatial_Object)
+admin.site.register(Espatial_Object)
