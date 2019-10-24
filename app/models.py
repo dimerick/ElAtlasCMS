@@ -162,6 +162,24 @@ class Perception(models.Model):
 	def __str__(self):
 		return self.cat_percep.name+"-"+self.person.name
 
+class Category_Espatial_Object(models.Model):
+	name = models.CharField(max_length=255, help_text='Please supply a name for this Category')
+	description = models.TextField(help_text='Please supply a description for this Category')
+
+	def __str__(self):
+		return self.name
+
+class Espatial_Object(models.Model):
+	name = models.CharField(max_length=255, help_text='Please supply a name for this group')
+	cat_espatial_object = models.ForeignKey(help_text='Please supply a category for this espatial object', Category_Espatial_Object, on_delete=models.CASCADE)
+	description = models.TextField(help_text='Please supply a description for this group')
+	location = models_gis.GeometryField(blank=True, null=True)
+	lat = models_gis.CharField(help_text='Please supply a latitude for this espatial object', max_length=255, default=None)
+	lon = models_gis.CharField(help_text='Please supply a longitude for this espatial object', max_length=255, default=None)
+	icon = models.CharField(max_length=255, default=None, blank=True, null=True, help_text='Please supply an icon for this espatial object')
+	is_active = models.BooleanField(default=True)
+	image = FilerImageField(help_text='Please supply an image for this espatial object', blank=True, null=True, default=None)
+
 # class Text_Slide(models.Model):
 	
 	
