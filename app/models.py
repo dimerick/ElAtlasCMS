@@ -171,7 +171,7 @@ class Category_Espatial_Object(models.Model):
 
 class Espatial_Object(models.Model):
 	name = models.CharField(max_length=255, help_text='Please supply a name for this group')
-	cat_espatial_object = models.ForeignKey(help_text='Please supply a category for this espatial object', Category_Espatial_Object, on_delete=models.CASCADE)
+	cat_espatial_object = models.ForeignKey(Category_Espatial_Object, help_text='Please supply a category for this espatial object', on_delete=models.CASCADE)
 	description = models.TextField(help_text='Please supply a description for this group')
 	location = models_gis.GeometryField(blank=True, null=True)
 	lat = models_gis.CharField(help_text='Please supply a latitude for this espatial object', max_length=255, default=None)
