@@ -180,6 +180,8 @@ class Espatial_Object(models.Model):
 	is_active = models.BooleanField(default=True)
 	image = FilerImageField(help_text='Please supply an image for this espatial object', blank=True, null=True, default=None)
 
+	def __str__(self):
+		return self.name+"-"+self.cat_espatial_object.name
 # class Text_Slide(models.Model):
 	
 	
