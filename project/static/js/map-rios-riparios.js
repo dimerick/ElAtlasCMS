@@ -1,6 +1,6 @@
 
 var controlSearchIniatilized = false;
-var url_data = '/app/perceptions/?key_word';
+var url_data = '/app/spatial-objects/?category=rios-riparios';
 var globalGroupsMap;
 var globalMarkers;
         var numGroups = 0;
@@ -68,11 +68,11 @@ var globalMarkers;
 
         jQuery("#button-search-map").click(
             function(){
-                var word = jQuery("#text-search-map").val();
-                if(word == ''){
-                url_data = '/app/perceptions/?key_word';
+                var category = jQuery("#text-search-map").val();
+                if(category == ''){
+                url_data = '/app/main-actors/?category';
                 }else{
-                url_data = '/app/perceptions/?key_word'+'='+word;
+                url_data = '/app/main-actors/?category'+'='+category;
                 }
                 getGroups();
             });
@@ -85,10 +85,66 @@ var globalMarkers;
             'maxHeight' : 300
         };
 
-        jQuery("#searchtext9").keypress(function() {
-  console.log( "Handler for .keypress() called." );
-});
-        
+
+
+        function getNetwork(){
+            jQuery.ajax({
+                url:   '/app/network-spatial-objects/?category=rios-riparios',
+                type:  'get',
+                beforeSend: function (){
+                },
+                success: function (data, textStatus, jqXHR){
+                    // console.log(data);
+                    // dataJson = JSON.parse(data);
+                                       
+                    dataJson = JSON.stringify(data);
+                    dataJson = JSON.parse(dataJson);
+                    console.log(dataJson);
+
+
+
+                    //Add lines to Map
+
+
+
+                    var dash_straight = {
+        color: 'rgb(145, 146, 150)',
+        fillColor: 'rgb(145, 146, 150)',
+        dashArray: 8,
+        opacity: 0.8,
+        weight: '1',
+    };
+console.log(dataJson);
+
+        L.bezier({
+        path: dataJson,
+
+        icon: {
+            path: '/static/images/plane.png'
+        }
+    }, dash_straight).addTo(map);
+
+                    jQuery("#img-search-map").html("");
+                    // map.addLayer(groupsMap);
+                    // map.addLayer(hondaMap);
+
+
+                   
+                },
+                error: function(jqXHR, text){
+                    console.log(jqXHR);
+                    console.log(text);
+                },
+                complete: function () {
+
+                }
+            });
+        }
+
+
+
+
+                
         function getGroups(){
             jQuery.ajax({
                 url:   url_data,
@@ -151,10 +207,32 @@ var globalMarkers;
                     map.addLayer(markers);
                     map.addLayer(hondaMap);
 
-                    
 
-    
+                    //Add lines to Map
 
+/*
+
+                    var dash_straight = {
+        color: 'rgb(145, 146, 150)',
+        fillColor: 'rgb(145, 146, 150)',
+        dashArray: 8,
+        opacity: 0.8,
+        weight: '1',
+    };
+
+                    L.bezier({
+        path: [
+            [
+                {lat: 7.17063, lng: -75.763980},//Sri Lanka
+                {lat: 7.01057, lng: -75.69216}//Japan
+            ]
+        ],
+
+        icon: {
+            path: '/static/images/plane.png'
+        }
+    }, dash_straight).addTo(map);
+*/
                     jQuery("#img-search-map").html("");
                     // map.addLayer(groupsMap);
                     // map.addLayer(hondaMap);
@@ -214,19 +292,26 @@ var globalMarkers;
                 // var lat = feature.geometry.coordinates[1];
                 // var lon = feature.geometry.coordinates[0];
 //                console.log(layer);
-                
-                var urlIcon = feature.properties.icon;
+
+var urlIcon = '/static/images/map-icon-red.png';
+if (feature.properties.icon != null){
+var urlIcon = feature.properties.icon;
+}
+
                 var myIcon = L.icon({
                     iconUrl: urlIcon,
                     iconSize: [32, 39],
                     iconAnchor: [0, 39],
                     popupAnchor: [16, -20]
                 });
+
+
+
                 var title = '<h4>'+feature.properties.name.toUpperCase()+'</h4>';
                 var content = '<div class="content-info-marker">' + title +
                     '<ul>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.category+'</span></li>' +
                     '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.description+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.perception+'</span></li>' +
                     '</ul>';
                 if(feature.properties.image != null){
                     content = content + '<img src="'+feature.properties.image+'">';
@@ -276,6 +361,7 @@ function eachHonda(feature, layer){
             }
         };
 
+getNetwork();
         getGroups();
 
 

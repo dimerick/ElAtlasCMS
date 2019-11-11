@@ -77,4 +77,32 @@ def espatial_objects(request):
 		if obj.image != None:
 			image = obj.image.url
 		coords = (obj.location.coords[0], obj.location.coords[1])
-		f = {"type": "Feature", "geometry": {"type": "Point", "coordinates": coords}, "properties": {"name": obj.name,  "description": obj.description, "icon": obj.icon, "image": image}}
+		f = {"type": "Feature", "geometry": {"type": "Point", "coordinates": coords}, "properties": {"name": obj.name,  "description": obj.description, "category": obj.cat_espatial_object.name, "icon": obj.icon, "image": image}}
+		fc['features'].append(f)
+	return JsonResponse(fc, safe=False)
+
+def network_espatial_objects(request):
+	category = request.GET['category']
+	espatial_objects = Espatial_Object.objects.filter(cat_espatial_object__name = category, is_active = True)
+	arr_gen = []
+	num = 0
+	for obj in espatial_objects:
+		for obj2 in espatial_objects:
+			if obj.name != obj2.name:
+				arr = []
+				p1 = {"lng": float(obj.location.coords[0]), "lat": float(obj.location.coords[1])}
+				p2 = {"lng": float(obj2.location.coords[0]), "lat": float(obj2.location.coords[1])}
+				arr.append(p1)
+				arr.append(p2)
+				arr_gen.append(arr)
+		num = num + 1		
+		
+	return JsonResponse(arr_gen, safe=False)
+
+def update_location_espatial_objects(request):
+	espatial_objects = Espatial_Object.objects.all()
+	for obj in espatial_objects:
+		wkt = 'POINT(' + obj.lon + ' ' + obj.lat + ')'
+		obj.location = GEOSGeometry(wkt, srid=4326)
+		obj.save()
+	return HttpResponse("Se ha actualizado la ubicacion de los objectos espaciales exitosamente")
