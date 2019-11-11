@@ -7,4 +7,5 @@ urlpatterns = [
 	url(r'^groups/$', views.groups, name='groups'),
 	url(r'^perceptions/$', views.perceptions, name='perceptions'),
 	url(r'^main-actors/$', views.main_actors, name='main-actors'),
+	url(r'^spatial-objects/$', views.espatial_objects, name='espatial-objects'),
 ]

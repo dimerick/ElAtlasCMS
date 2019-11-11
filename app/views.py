@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
-from .models import Group, Person, Perception
+from .models import Group, Person, Perception, Category_Espatial_Object, Espatial_Object
 from django.contrib.gis.geos import GEOSGeometry
 from django.core.serializers import serialize
 from django.db import connection #para ejecutar RAW queries
@@ -66,3 +66,15 @@ def main_actors(request):
 		f = {"type": "Feature", "geometry": {"type": "Point", "coordinates": coords}, "properties": {"name": grupo.name, "email": grupo.email, "description": grupo.description, "level": grupo.level, "icon": grupo.icon, "image": image}}
 		fc['features'].append(f)
 	return JsonResponse(fc, safe=False)
+
+def espatial_objects(request):
+	category = request.GET['category']
+	print(category)
+	espatial_objects = Espatial_Object.objects.filter(cat_espatial_object__name = category, is_active = True)
+	fc = {"type":"FeatureCollection", "crs": {"type": "name", "properties": {"name": "EPSG:4326"}}, "features": []}
+	for obj in espatial_objects:
+		image = None
+		if obj.image != None:
+			image = obj.image.url
+		coords = (obj.location.coords[0], obj.location.coords[1])
+		f = {"type": "Feature", "geometry": {"type": "Point", "coordinates": coords}, "properties": {"name": obj.name,  "description": obj.description, "icon": obj.icon, "image": image}}
