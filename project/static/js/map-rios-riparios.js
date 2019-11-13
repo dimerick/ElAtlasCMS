@@ -88,6 +88,35 @@ var globalMarkers;
 
 
         function getNetwork(){
+
+var dash_straight = {
+        color: 'rgb(145, 146, 150)',
+        fillColor: 'rgb(145, 146, 150)',
+        dashArray: 8,
+        opacity: 0.8,
+        weight: '1',
+    };
+
+
+        L.bezier({
+        path: [
+[{"lng": -75.8142, "lat": 6.8574}, {"lng": -75.6825, "lat": 6.9211}],
+[{"lng":-75.9094, "lat":7.0211}, {"lng":-75.6922, "lat":7.0106}],
+[{"lng":-75.7640, "lat":7.1706}, {"lng":-75.5507, "lat":7.1191}],
+[{"lng":-75.4399, "lat":7.1686}, {"lng":-75.3936, "lat":7.2885}],
+[{"lng":-74.8435, "lat":1.3349}, {"lng":-76.4706, "lat":3.4063}],
+[{"lng":-74.1261, "lat":4.5125}, {"lng":-74.9919, "lat":5.4081}],
+[{"lng":-76.6591, "lat":5.6908}, {"lng":-75.5682, "lat":6.2808}],
+[{"lng":-74.9950, "lat":6.0428}, {"lng":-72.7372, "lat":8.6411}],
+
+],
+
+        icon: {
+            path: '/static/images/point.png'
+        }
+    }, dash_straight).addTo(map);
+
+/*
             jQuery.ajax({
                 url:   '/app/network-spatial-objects/?category=rios-riparios',
                 type:  'get',
@@ -107,22 +136,7 @@ var globalMarkers;
 
 
 
-                    var dash_straight = {
-        color: 'rgb(145, 146, 150)',
-        fillColor: 'rgb(145, 146, 150)',
-        dashArray: 8,
-        opacity: 0.8,
-        weight: '1',
-    };
-console.log(dataJson);
-
-        L.bezier({
-        path: dataJson,
-
-        icon: {
-            path: '/static/images/plane.png'
-        }
-    }, dash_straight).addTo(map);
+                    
 
                     jQuery("#img-search-map").html("");
                     // map.addLayer(groupsMap);
@@ -139,6 +153,9 @@ console.log(dataJson);
 
                 }
             });
+
+            */
+
         }
 
 
