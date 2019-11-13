@@ -1,0 +1,254 @@
+{% extends "base.html" %}
+{% load cms_tags %}
+{% load staticfiles %}
+{% load sekizai_tags %}
+
+{% block title %}{% page_attribute "page_title" %}{% endblock title %}
+
+{#{% block css %}#}
+{##}
+{##}
+{#{% endblock css %}#}
+
+
+
+
+{% block content %}
+    {% addtoblock "css" %}
+        <link href="{% static "css/leaflet.css" %}" rel="stylesheet">
+    {% endaddtoblock "css" %}
+    {% addtoblock "css" %}
+        <link href="{% static "css/iconLayers.css" %}" rel="stylesheet">
+    {% endaddtoblock "css" %}
+     {% addtoblock "css" %}
+        <link href="{% static "css/Control.FullScreen.css" %}" rel="stylesheet">
+    {% endaddtoblock "css" %}
+    {% addtoblock "css" %}
+        <link href="{% static "css/MarkerCluster.css" %}" rel="stylesheet">
+    {% endaddtoblock "css" %}
+    {% addtoblock "css" %}
+        <link href="{% static "css/MarkerCluster.Default.css" %}" rel="stylesheet">
+    {% endaddtoblock "css" %}
+    {% addtoblock "css" %}
+        <link href="{% static "css/leaflet-search.css" %}" rel="stylesheet">
+    {% endaddtoblock "css" %}
+
+{% addtoblock "css" %}
+        <link href="{% static "css/lightbox.min.css" %}" rel="stylesheet">
+    {% endaddtoblock "css" %}
+
+    {% addtoblock "css" %}
+        <style>
+        #map{
+    width: 100%;
+    height: 500px;
+    background-color: #e2dce2;
+    z-index: 1;
+}
+
+#div-search-map{
+    margin-top: 20px!important;
+margin-bottom: 10px!important;
+margin-left: 5px!important;
+}
+#img-search-map{
+    display: inline-block;
+}
+#text-search-map{
+        margin-top: 20px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+.div-icon {
+  background-color: #1ebbd4;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: .8em;
+  color: white;
+  font-weight: bold;
+}
+
+.color1{
+  background-color: #f29b00;
+  background: radial-gradient(at top left, #f29b00 20%, #000000);
+}
+.color2{
+  background-color: #e8de0d;
+  background: radial-gradient(at top left, #e8de0d 20%, #000000);
+}
+.color3{
+  background-color: #7dba2f;
+  background: radial-gradient(at top left, #7dba2f 20%, #000000);
+}
+.color4{
+  background-color: #049a6c;
+  background: radial-gradient(at top left, #049a6c 20%, #000000);
+}
+.color5{
+  background-color: #009cda;
+  background: radial-gradient(at top left, #009cda 20%, #000000);
+}
+.color6{
+  background-color: #8d8b04;
+  background: radial-gradient(at top left, #dcd907 20%, #000000);
+}
+.color7{
+  background-color: #00108c;
+  background: radial-gradient(at top left, #0019f2 20%, #000000);
+}
+.color8{
+  background-color: #a60e7d;
+  background: radial-gradient(at top left, #a60e7d 20%, #000000);
+}
+/*.color9{*/
+/*background-color: #ec429a;*/
+/*background: radial-gradient(at top left, #ff45aa 20%, #ba3379);*/
+/*}*/
+
+.color9{
+  background-color: #f0a85f;
+  background: radial-gradient(at top left, #f3aa5f 20%, #000000);
+}
+/*.color11{*/
+/*background-color: #cee7c0;*/
+/*background: radial-gradient(at top left, #cee7c0 20%, #9eb5ab);*/
+/*}*/
+.color12{
+  background-color: #b4c2f4;
+  background: radial-gradient(at top left, #b1c0f4 20%, #000000);
+}
+.color13{
+  background-color: #d5e14d;
+  background: radial-gradient(at top left, #d5e14d 20%, #000000);
+}
+.color14{
+  background-color: #582601;
+  background: radial-gradient(at top left, #a84902 20%, #000000);
+}
+.color21{
+  background-color: #79288e;
+  background: radial-gradient(at top left, #b738d3 20%, #000000);
+}
+.color16{
+  background-color: #5161ac;
+  background: radial-gradient(at top left, #6375d1 20%, #000000);
+}
+.color17{
+  background-color: #ffd994;
+  background: radial-gradient(at top left, #dfbd81 20%, #000000);
+}
+.color0{
+  background-color: #1fb25a;
+  background: radial-gradient(at top left, #26e174 20%, #000000);
+}
+.color11{
+  background-color: #d70015;
+  background: radial-gradient(at top left, #d70015 20%, #000000);
+}
+.color15{
+  background-color: #eec2db;
+  background: radial-gradient(at top left, #eec2db 20%, #000000);
+}
+/*.color21{*/
+/*background-color: #cee7c0;*/
+/*background: radial-gradient(at top left, #e3fad4 20%, #7e9077);*/
+/*}*/
+.color22{
+  background-color: #ec6e21;
+  background: radial-gradient(at top left, #ffb907 20%, #ba5217);
+}
+.color23{
+  background-color: #b20839;
+  background: radial-gradient(at top left, #ff0a4e 20%, #9c0732);
+}
+.color19{
+  background-color: #b20839;
+  background: radial-gradient(at top left, #ff0a4e 20%, #000000);
+}
+.color20{
+  background-color: #fff001;
+  background: radial-gradient(at top left, #e5d801 20%, #000000);
+}
+.color10{
+  background-color: #b7e1df;
+  background: radial-gradient(at top left, #95b8b6 20%, #000000);
+}
+.color18{
+  background-color: #22d6f1;
+  background: radial-gradient(at top left, #1ebbd4 20%, #000000);
+}
+        </style>
+    {% endaddtoblock "css" %}
+    <div id="#div-search-map">
+        <input type="text" id="text-search-map">
+<input type="button" id="button-search-map"value="search">
+<div id="img-search-map">
+    
+</div>
+    </div>
+
+<div id="map"> </div>
+
+
+    {% addtoblock "js" %}
+<script src="{% static "js/leaflet.js" %}"></script>
+{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}
+<script src="{% static "js/proj4.js" %}"></script>
+{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}
+<script src="{% static "js/iconLayers.js" %}"></script>
+{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}
+<script src="{% static "js/Control.FullScreen.js" %}"></script>
+{% endaddtoblock "js" %}
+
+
+{% addtoblock "js" %}
+<script src="{% static "js/leaflet.markercluster.js" %}"></script>
+{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}
+<script src="{% static "js/proj4leaflet.js" %}"></script>
+{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}
+<script src="{% static "js/leaflet-search.js" %}"></script>
+{% endaddtoblock "js" %}    
+
+{% addtoblock "js" %}
+<script src="{% static "js/lightbox.min.js" %}"></script>
+{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}
+<script src="{% static "js/snap.svg.js" %}"></script>
+{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}
+<script src="{% static "js/leaflet.bezier.js" %}"></script>
+{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}
+ <script src="{% static "js/data.js" %}"></script>
+{% endaddtoblock "js" %}
+
+ {% addtoblock "js" %}
+ <script src="{% static "js/map-red-legion.js" %}"></script>
+{% endaddtoblock "js" %}
+
+
+{% endblock content %}
+
+
+
+{#{% block js %}#}
+{##}
+{#    #}
+{##}
+{#{% endblock js %}#}
