@@ -1,6 +1,6 @@
 
 var controlSearchIniatilized = false;
-var url_data = '/app/spatial-objects/?category=rios-riparios';
+var url_data = '/app/spatial-objects/?category=red-legion';
 var globalGroupsMap;
 var globalMarkers;
         var numGroups = 0;
@@ -114,7 +114,7 @@ var dash_straight = {
 
 /*
             jQuery.ajax({
-                url:   '/app/network-spatial-objects/?category=rios-riparios',
+                url:   '/app/network-spatial-objects/?category=red-legion',
                 type:  'get',
                 beforeSend: function (){
                 },
