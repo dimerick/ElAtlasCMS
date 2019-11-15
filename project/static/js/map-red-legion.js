@@ -85,7 +85,10 @@ var globalMarkers;
             'maxHeight' : 300
         };
 
-
+var colombiaMap = L.Proj.geoJson(colombia,{
+                        onEachFeature: eachColombia
+                    });
+map.addLayer(colombiaMap);
 
         function getNetwork(){
 
@@ -94,7 +97,7 @@ var dash_straight = {
         fillColor: 'rgb(145, 146, 150)',
         dashArray: 8,
         opacity: 0.8,
-        weight: '1',
+        weight: '5',
     };
 
 
@@ -104,11 +107,25 @@ var dash_straight = {
 [{"lng":-74.1261, "lat":4.5125}, {"lng":-74.9919, "lat":5.4081}],
 [{"lng":-76.6591, "lat":5.6908}, {"lng":-75.5682, "lat":6.2808}],
 [{"lng":-74.9950, "lat":6.0428}, {"lng":-72.7372, "lat":8.6411}],
+[{"lng":-74.8435, "lat":1.3349}, {"lng":-74.1261, "lat":4.5125}],
+[{"lng":-76.4706, "lat":3.4063}, {"lng":-74.1261, "lat":4.5125}],
+[{"lng":-76.4706, "lat":3.4063}, {"lng":-76.6591, "lat":5.6908}],
+[{"lng":-75.5682, "lat":6.2808}, {"lng":-74.9950, "lat":6.0428}],
+[{"lng":-75.5682, "lat":6.2808}, {"lng":-74.9919, "lat":5.4081}],
+[{"lng":-74.9919, "lat":5.4081}, {"lng":-74.9950, "lat":6.0428}],
+[{"lng":-73.8543, "lat":7.0621}, {"lng":-72.7372, "lat":8.6411}],
+[{"lng":-73.8543, "lat":7.0621}, {"lng":-74.1261, "lat":4.5125}],
+[{"lng":-73.8543, "lat":7.0621}, {"lng":-74.9950, "lat":6.0428}],
+[{"lng":-73.8543, "lat":7.0621}, {"lng":-74.9919, "lat":5.4081}],
+[{"lng":-73.8543, "lat":7.0621}, {"lng":-75.5682, "lat":6.2808}],
+[{"lng":-73.8543, "lat":7.0621}, {"lng":-76.6591, "lat":5.6908}],
+[{"lng":-73.8543, "lat":7.0621}, {"lng":-76.4706, "lat":3.4063}],
+[{"lng":-73.8543, "lat":7.0621}, {"lng":-74.8435, "lat":1.3349}],
 
 ],
 
         icon: {
-            path: '/static/images/point.png'
+            path: '/static/images/icon-transparent.png'
         }
     }, dash_straight).addTo(map);
 
@@ -361,6 +378,33 @@ function eachHonda(feature, layer){
             //L.Util.setOptions(layer, { style: styleG2 });
 
                 var title = '<h4>Honda</h4>';
+                var content = '<div class="content-info-marker">' + title;
+                    
+                
+                content = content +'</div>';
+
+
+            layer.setStyle(styleG2);
+
+
+                layer.bindPopup(content, {maxWidth:300, minWidth: 200, maxHeight:300})
+            }
+        };
+
+        function eachColombia(feature, layer){
+            if(layer != null){
+
+            var styleG2 = {
+            fill: false,
+            fillColor:'#f0e428',
+            fillOpacity: 1.0,
+            color : '#59abd5',
+            weight: 3
+            };
+
+            //L.Util.setOptions(layer, { style: styleG2 });
+
+                var title = '<h4>Antioquia</h4>';
                 var content = '<div class="content-info-marker">' + title;
                     
                 
