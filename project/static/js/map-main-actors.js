@@ -85,9 +85,8 @@ var globalMarkers;
             'maxHeight' : 300
         };
 
-        jQuery("#searchtext9").keypress(function() {
-  console.log( "Handler for .keypress() called." );
-});
+        
+        
         
         function getGroups(){
             jQuery.ajax({

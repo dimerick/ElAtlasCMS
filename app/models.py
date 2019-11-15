@@ -173,6 +173,7 @@ class Espatial_Object(models.Model):
 	name = models.CharField(max_length=255, help_text='Please supply a name for this group')
 	cat_espatial_object = models.ForeignKey(Category_Espatial_Object, help_text='Please supply a category for this espatial object', on_delete=models.CASCADE)
 	description = models.TextField(help_text='Please supply a description for this group')
+	level = models.DecimalField(max_digits=5, decimal_places=2, default=0, blank=True, null=True, help_text='Level Group')
 	location = models_gis.GeometryField(blank=True, null=True)
 	lat = models_gis.CharField(help_text='Please supply a latitude for this espatial object', max_length=255, default=None)
 	lon = models_gis.CharField(help_text='Please supply a longitude for this espatial object', max_length=255, default=None)
