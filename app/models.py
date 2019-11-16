@@ -163,15 +163,32 @@ class Perception(models.Model):
 		return self.cat_percep.name+"-"+self.person.name
 
 class Category_Espatial_Object(models.Model):
-	name = models.CharField(max_length=255, help_text='Please supply a name for this Category')
-	description = models.TextField(help_text='Please supply a description for this Category')
+	name = models.CharField(max_length=255, help_text='Please supply a name for this Map')
+	description = models.TextField(help_text='Please supply a description for this Map')
+
+	class Meta:
+		verbose_name = "Map"
+		verbose_name_plural = "Maps"
+
+	def __str__(self):
+		return self.name
+
+class Category_Spatial_Object_Indv(models.Model):
+	name = models.CharField(max_length=255, help_text='Please supply a individual category for each spatial object in the map')
+	description = models.TextField(help_text='Please supply a description for this individual category')
+	color_cat = ColorField('Color', default='#FFF')
+
+	class Meta:
+		verbose_name = "Category Spatial Object"
+		verbose_name_plural = "Category Spatial Objects"
 
 	def __str__(self):
 		return self.name
 
 class Espatial_Object(models.Model):
 	name = models.CharField(max_length=255, help_text='Please supply a name for this group')
-	cat_espatial_object = models.ForeignKey(Category_Espatial_Object, help_text='Please supply a category for this espatial object', on_delete=models.CASCADE)
+	cat_espatial_object = models.ForeignKey(Category_Espatial_Object, verbose_name = 'Map', help_text='Please supply a Map for this espatial object', on_delete=models.CASCADE)
+	cat_spatial_object_indv = models.ForeignKey(Category_Spatial_Object_Indv, verbose_name = 'Category', help_text='Please supply a individual category for this espatial object', on_delete=models.CASCADE)
 	description = models.TextField(help_text='Please supply a description for this group')
 	level = models.DecimalField(max_digits=5, decimal_places=2, default=0, blank=True, null=True, help_text='Level Group')
 	location = models_gis.GeometryField(blank=True, null=True)
@@ -181,8 +198,12 @@ class Espatial_Object(models.Model):
 	is_active = models.BooleanField(default=True)
 	image = FilerImageField(help_text='Please supply an image for this espatial object', blank=True, null=True, default=None)
 
+	class Meta:
+		verbose_name = "Spatial Object"
+		verbose_name_plural = "Spatial Objects"
+
 	def __str__(self):
-		return self.name+"-"+self.cat_espatial_object.name
+		return self.cat_espatial_object.name+' | '+self.cat_spatial_object_indv.name+' | '+self.name
 # class Text_Slide(models.Model):
 	
 	

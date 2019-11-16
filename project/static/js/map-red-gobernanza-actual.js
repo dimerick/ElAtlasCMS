@@ -1,6 +1,6 @@
 
 var controlSearchIniatilized = false;
-var url_data = '/app/spatial-objects/?category=red-gobernanza-actual';
+var url_data = '/app/spatial-objects/?mapa=red-gobernanza-actual';
 var globalGroupsMap;
 var globalMarkers;
         var numGroups = 0;
@@ -28,6 +28,16 @@ var globalMarkers;
             })
         };
         layers.push(esriWorldImagery);
+
+        CartoDB_DarkMatter = 
+        {
+
+            title: 'CartoDB DarkMatter',
+            layer: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'    
+            })
+};
+layers.push(CartoDB_DarkMatter);
 
         // L.control.iconL
         var map = L.map('map', {
@@ -70,9 +80,9 @@ var globalMarkers;
             function(){
                 var category = jQuery("#text-search-map").val();
                 if(category == ''){
-                url_data = '/app/main-actors/?category';
+                url_data = '/app/main-actors/?mapa';
                 }else{
-                url_data = '/app/main-actors/?category'+'='+category;
+                url_data = '/app/main-actors/?mapa'+'='+category;
                 }
                 getGroups();
             });
@@ -92,31 +102,81 @@ var globalMarkers;
 
         function getNetwork(){
 
-var dash_straight = {
-        color: 'rgb(145, 146, 150)',
-        fillColor: 'rgb(145, 146, 150)',
-        dashArray: 8,
+var dash_straight1 = {
+        color: '#f25f5c',
+        fillColor: '#f25f5c',
+        dashArray: 0,
         opacity: 0.8,
-        weight: '5',
+        weight: '4',
+    };
+
+var dash_straight2 = {
+        color: '#f25f5c',
+        fillColor: '#f25f5c',
+        dashArray: 0,
+        opacity: 0.8,
+        weight: '4',
+    };
+
+var dash_straight3 = {
+        color: '#f6ae2d',
+        fillColor: '#f6ae2d',
+        dashArray: 0,
+        opacity: 0.8,
+        weight: '3',
     };
 
 
+
+/*Public -> Public*/
         L.bezier({
         path: [
-[{"lng":-75.5741, "lat":6.2423}, {"lng":-75.5747, "lat":6.2456}],
-[{"lng":-75.5741, "lat":6.2423}, {"lng":-75.5627, "lat":6.2532}],
-[{"lng":-75.5747, "lat":6.2456}, {"lng":-75.5627, "lat":6.2532}],
-[{"lng":-75.5627, "lat":6.2532}, {"lng":-75.5440, "lat":6.2699}],
+[{"lng": -75.57467799999999, "lat": 6.245562999999978, slide: 'RIGHT_ROUND'}, {"lng": -75.57408799999997, "lat": 6.242299999999965}]
 ],
 
         icon: {
             path: '/static/images/icon-transparent.png'
         }
-    }, dash_straight).addTo(map);
+    }, dash_straight2).addTo(map);
+
+/*Public -> Community*/
+        L.bezier({
+        path: [
+[{"lng": -75.57408799999997, "lat": 6.242299999999965}, {"lng": -75.54401899999999, "lat": 6.269874999999979}], [{"lng": -75.57467799999999, "lat": 6.245562999999978}, {"lng": -75.54401899999999, "lat": 6.269874999999979}],
+],
+
+        icon: {
+            path: '/static/images/icon-transparent.png'
+        }
+    }, dash_straight1).addTo(map);
+
+
+/*Public -> Technical*/
+L.bezier({
+        path: [
+[{"lng": -75.57408799999997, "lat": 6.242299999999965}, {"lng": -75.562668, "lat": 6.253179000000005}], [{"lng": -75.57467799999999, "lat": 6.245562999999978}, {"lng": -75.562668, "lat": 6.253179000000005}]
+],
+
+        icon: {
+            path: '/static/images/icon-transparent.png'
+        }
+    }, dash_straight2).addTo(map);
+
+
+/*Technical -> Community*/
+L.bezier({
+        path: [
+[{"lng": -75.562668, "lat": 6.253179000000005}, {"lng": -75.54401899999999, "lat": 6.269874999999979}]
+],
+
+        icon: {
+            path: '/static/images/icon-transparent.png'
+        }
+    }, dash_straight3).addTo(map);
 
 /*
             jQuery.ajax({
-                url:   '/app/network-spatial-objects/?category=red-legion',
+                url:   '/app/network-spatial-objects/?mapa=red-legion',
                 type:  'get',
                 beforeSend: function (){
                 },
@@ -205,6 +265,9 @@ var dash_straight = {
                         onEachFeature: eachHonda
                     });
 
+                    var areaHondaMap = L.Proj.geoJson(area_honda,{
+                        onEachFeature: eachAreaHonda
+                    });
 
                     // var hondaMap = L.Proj.geoJson(honda,{
                     //     onEachFeature: eachHonda
@@ -219,8 +282,13 @@ var dash_straight = {
                     globalGroupsMap = groupsMap;
                     globalMarkers = markers;
                     markers.addLayer(groupsMap);
-                    map.addLayer(markers);
+
+                    map.addLayer(areaHondaMap);
                     map.addLayer(hondaMap);
+                    map.addLayer(groupsMap);
+                    
+                    
+
 
 
                     //Add lines to Map
@@ -308,24 +376,59 @@ var dash_straight = {
                 // var lon = feature.geometry.coordinates[0];
 //                console.log(layer);
 
+/*Only for image icon
 var urlIcon = '/static/images/map-icon-red.png';
 if (feature.properties.icon != null){
 var urlIcon = feature.properties.icon;
 }
 
-                var myIcon = L.icon({
+var myIcon = L.icon({
                     iconUrl: urlIcon,
                     iconSize: [32, 39],
                     iconAnchor: [0, 39],
                     popupAnchor: [16, -20]
                 });
+*/
 
+/*Only icon Css*/
+
+level = feature.properties.level;
+category = feature.properties.category;
+
+if(level == 1){
+        size = 15;
+      }else if(level == 2){
+        size = 25;
+      }else if(level == 3){
+          size = 45;
+        }      
+                
+
+console.log(category);
+if (category == "Community"){
+theClass = "div-icon color1";
+}else if(category == "Technical"){
+    theClass = "div-icon color2";
+}else if(category == "Public"){
+    theClass = "div-icon color3";
+}
+console.log(theClass);
+
+var myIcon = L.divIcon({
+          className: theClass,
+          //html: feature.properties.level,
+          iconSize: [size, size],
+          iconAnchor: [size/2, size/2]
+
+        });
+                
 
 
                 var title = '<h4>'+feature.properties.name.toUpperCase()+'</h4>';
                 var content = '<div class="content-info-marker">' + title +
                     '<ul>' +
                     '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.category+'</span></li>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.coords[0]+' | '+feature.properties.coords[1]+'</span></li>' +
                     '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.description+'</span></li>' +
                     '</ul>';
                 if(feature.properties.image != null){
@@ -403,7 +506,35 @@ function eachHonda(feature, layer){
             }
         };
 
-getNetwork();
+        function eachAreaHonda(feature, layer){
+            if(layer != null){
+
+            var styleG2 = {
+            fill: false,
+            fillColor:'#f0e428',
+            fillOpacity: 1.0,
+            color : '#50514f',
+            weight: 3
+            };
+
+            //L.Util.setOptions(layer, { style: styleG2 });
+
+                var title = '<h4>Area Honda</h4>';
+                var content = '<div class="content-info-marker">' + title;
+                    
+                
+                content = content +'</div>';
+
+
+            layer.setStyle(styleG2);
+
+
+                layer.bindPopup(content, {maxWidth:300, minWidth: 200, maxHeight:300})
+            }
+        };
+
+
         getGroups();
+        getNetwork();
 
 

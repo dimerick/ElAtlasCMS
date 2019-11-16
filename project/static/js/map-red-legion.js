@@ -1,6 +1,6 @@
 
 var controlSearchIniatilized = false;
-var url_data = '/app/spatial-objects/?category=red-legion';
+var url_data = '/app/spatial-objects/?mapa=red-legion';
 var globalGroupsMap;
 var globalMarkers;
         var numGroups = 0;
@@ -70,9 +70,9 @@ var globalMarkers;
             function(){
                 var category = jQuery("#text-search-map").val();
                 if(category == ''){
-                url_data = '/app/main-actors/?category';
+                url_data = '/app/main-actors/?mapa';
                 }else{
-                url_data = '/app/main-actors/?category'+'='+category;
+                url_data = '/app/main-actors/?mapa'+'='+category;
                 }
                 getGroups();
             });
@@ -131,7 +131,7 @@ var dash_straight = {
 
 /*
             jQuery.ajax({
-                url:   '/app/network-spatial-objects/?category=red-legion',
+                url:   '/app/network-spatial-objects/?mapa=red-legion',
                 type:  'get',
                 beforeSend: function (){
                 },

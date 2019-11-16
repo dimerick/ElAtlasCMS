@@ -1,6 +1,6 @@
 
 var controlSearchIniatilized = false;
-var url_data = '/app/spatial-objects/?category=red-gobernanza-alternativa';
+var url_data = '/app/spatial-objects/?mapa=red-gobernanza-alternativa';
 var globalGroupsMap;
 var globalMarkers;
         var numGroups = 0;
@@ -70,9 +70,9 @@ var globalMarkers;
             function(){
                 var category = jQuery("#text-search-map").val();
                 if(category == ''){
-                url_data = '/app/main-actors/?category';
+                url_data = '/app/main-actors/?mapa';
                 }else{
-                url_data = '/app/main-actors/?category'+'='+category;
+                url_data = '/app/main-actors/?mapa'+'='+category;
                 }
                 getGroups();
             });
@@ -100,6 +100,8 @@ var dash_straight = {
         weight: '5',
     };
 
+
+/*ALEXIS
 
         L.bezier({
         path: [
@@ -136,9 +138,24 @@ var dash_straight = {
         }
     }, dash_straight).addTo(map);
 
+    */
+
+
+        L.bezier({
+        path: [
+[{"lng":-75.574088, "lat":6.2423, slide: 'RIGHT_ROUND'}, {"lng":-75.501877, "lat":6.280658}],
+
+],
+
+        icon: {
+            path: '/static/images/icon-transparent.png'
+        }
+    }, dash_straight).addTo(map);
+
+
 /*
             jQuery.ajax({
-                url:   '/app/network-spatial-objects/?category=red-legion',
+                url:   '/app/network-spatial-objects/?mapa=red-legion',
                 type:  'get',
                 beforeSend: function (){
                 },
@@ -241,7 +258,7 @@ var dash_straight = {
                     globalGroupsMap = groupsMap;
                     globalMarkers = markers;
                     markers.addLayer(groupsMap);
-                    map.addLayer(markers);
+                    map.addLayer(groupsMap);
                     map.addLayer(hondaMap);
 
 
@@ -338,7 +355,7 @@ var urlIcon = feature.properties.icon;
                 var myIcon = L.icon({
                     iconUrl: urlIcon,
                     iconSize: [32, 39],
-                    iconAnchor: [0, 39],
+                    iconAnchor: [16, 39],
                     popupAnchor: [16, -20]
                 });
 
@@ -348,6 +365,7 @@ var urlIcon = feature.properties.icon;
                 var content = '<div class="content-info-marker">' + title +
                     '<ul>' +
                     '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.category+'</span></li>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.coords[0]+' | '+feature.properties.coords[1]+'</span></li>' +
                     '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.description+'</span></li>' +
                     '</ul>';
                 if(feature.properties.image != null){

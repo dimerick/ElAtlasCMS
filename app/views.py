@@ -68,33 +68,35 @@ def main_actors(request):
 	return JsonResponse(fc, safe=False)
 
 def espatial_objects(request):
-	category = request.GET['category']
-	print(category)
-	espatial_objects = Espatial_Object.objects.filter(cat_espatial_object__name = category, is_active = True)
+	mapa = request.GET['mapa']
+	espatial_objects = Espatial_Object.objects.filter(cat_espatial_object__name = mapa, is_active = True)
 	fc = {"type":"FeatureCollection", "crs": {"type": "name", "properties": {"name": "EPSG:4326"}}, "features": []}
 	for obj in espatial_objects:
 		image = None
 		if obj.image != None:
 			image = obj.image.url
 		coords = (obj.location.coords[0], obj.location.coords[1])
-		f = {"type": "Feature", "geometry": {"type": "Point", "coordinates": coords}, "properties": {"name": obj.name,  "description": obj.description, "category": obj.cat_espatial_object.name, "icon": obj.icon, "image": image}}
+		f = {"type": "Feature", "geometry": {"type": "Point", "coordinates": coords}, "properties": {"name": obj.name,  "description": obj.description, "coords": (obj.location.coords[0], obj.location.coords[1]),"mapa": obj.cat_espatial_object.name, "category": obj.cat_spatial_object_indv.name, "level": obj.level, "color": obj.cat_spatial_object_indv.color_cat, "icon": obj.icon, "image": image}}
 		fc['features'].append(f)
 	return JsonResponse(fc, safe=False)
 
 def network_espatial_objects(request):
-	category = request.GET['category']
-	espatial_objects = Espatial_Object.objects.filter(cat_espatial_object__name = category, is_active = True)
+	mapa = request.GET['mapa']
+	category1 = request.GET['category1']
+	category2 = request.GET['category2']
+	
+	espatial_objects1 = Espatial_Object.objects.filter(cat_espatial_object__name = mapa, cat_spatial_object_indv__name = category1, is_active = True)
+	espatial_objects2 = Espatial_Object.objects.filter(cat_espatial_object__name = mapa, cat_spatial_object_indv__name = category2, is_active = True)
 	arr_gen = []
 	num = 0
-	for obj in espatial_objects:
-		for obj2 in espatial_objects:
-			if obj.name != obj2.name:
-				arr = []
-				p1 = {"lng": float(obj.location.coords[0]), "lat": float(obj.location.coords[1])}
-				p2 = {"lng": float(obj2.location.coords[0]), "lat": float(obj2.location.coords[1])}
-				arr.append(p1)
-				arr.append(p2)
-				arr_gen.append(arr)
+	for obj in espatial_objects1:
+		for obj2 in espatial_objects2:
+			arr = []
+			p1 = {"lng": float(obj.location.coords[0]), "lat": float(obj.location.coords[1])}
+			p2 = {"lng": float(obj2.location.coords[0]), "lat": float(obj2.location.coords[1])}
+			arr.append(p1)
+			arr.append(p2)
+			arr_gen.append(arr)
 		num = num + 1		
 		
 	return JsonResponse(arr_gen, safe=False)

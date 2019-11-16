@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Slider, Slide, Partner, TeamMember, Activity, Project, Group, Person, Lider, Category_Perception, Perception, Category_Espatial_Object, Espatial_Object
+from .models import Slider, Slide, Partner, TeamMember, Activity, Project, Group, Person, Lider, Category_Perception, Perception, Category_Espatial_Object, Category_Spatial_Object_Indv, Espatial_Object
 
 # Register your models here.
 class SliderAdmin(admin.ModelAdmin):
@@ -71,4 +71,5 @@ admin.site.register(Lider)
 admin.site.register(Category_Perception)
 admin.site.register(Perception)
 admin.site.register(Category_Espatial_Object)
+admin.site.register(Category_Spatial_Object_Indv)
 admin.site.register(Espatial_Object)
