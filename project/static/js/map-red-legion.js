@@ -234,7 +234,7 @@ var dash_straight = {
                     globalGroupsMap = groupsMap;
                     globalMarkers = markers;
                     markers.addLayer(groupsMap);
-                    map.addLayer(markers);
+                    map.addLayer(groupsMap);
                     map.addLayer(hondaMap);
 
 
@@ -331,7 +331,7 @@ var urlIcon = feature.properties.icon;
                 var myIcon = L.icon({
                     iconUrl: urlIcon,
                     iconSize: [32, 39],
-                    iconAnchor: [0, 39],
+                    iconAnchor: [16, 39],
                     popupAnchor: [16, -20]
                 });
 
