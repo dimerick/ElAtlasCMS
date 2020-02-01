@@ -1,6 +1,6 @@
 
 var controlSearchIniatilized = false;
-var url_data = '/app/spatial-objects/?category=rios-riparios';
+var url_data = '/app/spatial-objects/?mapa=rios-riparios';
 var globalGroupsMap;
 var globalMarkers;
         var numGroups = 0;
@@ -70,9 +70,9 @@ var globalMarkers;
             function(){
                 var category = jQuery("#text-search-map").val();
                 if(category == ''){
-                url_data = '/app/main-actors/?category';
+                url_data = '/app/main-actors/?mapa';
                 }else{
-                url_data = '/app/main-actors/?category'+'='+category;
+                url_data = '/app/main-actors/?mapa'+'='+category;
                 }
                 getGroups();
             });
@@ -127,7 +127,7 @@ var dash_straight = {
 
 /*
             jQuery.ajax({
-                url:   '/app/network-spatial-objects/?category=rios-riparios',
+                url:   '/app/network-spatial-objects/?mapa=rios-riparios',
                 type:  'get',
                 beforeSend: function (){
                 },
@@ -230,7 +230,7 @@ var dash_straight = {
                     globalGroupsMap = groupsMap;
                     globalMarkers = markers;
                     markers.addLayer(groupsMap);
-                    map.addLayer(markers);
+                    map.addLayer(groupsMap);
                     map.addLayer(hondaMap);
 
 
@@ -327,7 +327,7 @@ var urlIcon = feature.properties.icon;
                 var myIcon = L.icon({
                     iconUrl: urlIcon,
                     iconSize: [32, 39],
-                    iconAnchor: [0, 39],
+                    iconAnchor: [16, 39],
                     popupAnchor: [16, -20]
                 });
 

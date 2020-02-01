@@ -134,6 +134,9 @@ var globalMarkers;
                         onEachFeature: eachHonda
                     });
 
+                    var areaHondaMap = L.Proj.geoJson(area_honda,{
+                        onEachFeature: eachAreaHonda
+                    });
 
                     // var hondaMap = L.Proj.geoJson(honda,{
                     //     onEachFeature: eachHonda
@@ -148,8 +151,10 @@ var globalMarkers;
                     globalGroupsMap = groupsMap;
                     globalMarkers = markers;
                     markers.addLayer(groupsMap);
-                    map.addLayer(markers);
+                    
+                    map.addLayer(areaHondaMap);
                     map.addLayer(hondaMap);
+                    map.addLayer(groupsMap);
 
                     
 
@@ -263,6 +268,34 @@ function eachHonda(feature, layer){
             //L.Util.setOptions(layer, { style: styleG2 });
 
                 var title = '<h4>Honda</h4>';
+                var content = '<div class="content-info-marker">' + title;
+                    
+                
+                content = content +'</div>';
+
+
+            layer.setStyle(styleG2);
+
+
+                layer.bindPopup(content, {maxWidth:300, minWidth: 200, maxHeight:300})
+            }
+        };
+
+
+        function eachAreaHonda(feature, layer){
+            if(layer != null){
+
+            var styleG2 = {
+            fill: false,
+            fillColor:'#f0e428',
+            fillOpacity: 1.0,
+            color : '#50514f',
+            weight: 3
+            };
+
+            //L.Util.setOptions(layer, { style: styleG2 });
+
+                var title = '<h4>Area Honda</h4>';
                 var content = '<div class="content-info-marker">' + title;
                     
                 
