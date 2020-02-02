@@ -34,6 +34,17 @@ var idClasses = [1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 21, 16, 17, 0, 11, 15, 2
         };
         layers.push(esriWorldImagery);
 
+        CartoDB_DarkMatter = 
+        {
+
+            title: 'CartoDB DarkMatter',
+            icon: '/static/images/carto_dark.png',
+            layer: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'    
+            })
+};
+layers.push(CartoDB_DarkMatter);
+
         // L.control.iconL
         var map = L.map('map', {
             center: [6.2552985, -75.6078625],

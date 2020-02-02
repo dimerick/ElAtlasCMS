@@ -29,6 +29,17 @@ var globalMarkers;
         };
         layers.push(esriWorldImagery);
 
+        CartoDB_DarkMatter = 
+        {
+
+            title: 'CartoDB DarkMatter',
+            icon: '/static/images/carto_dark.png',
+            layer: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'    
+            })
+};
+layers.push(CartoDB_DarkMatter);
+
         // L.control.iconL
         var map = L.map('map', {
             center: [6.2552985, -75.6078625],
@@ -165,12 +176,12 @@ var globalMarkers;
                     // map.addLayer(hondaMap);
 
 
-                    /*setTimeout(function(){
+                    setTimeout(function(){
                         if(!controlSearchIniatilized){
                             // codigo para implementar la barra de busqueda
                             globalSearchControl = new L.Control.Search({
                                 layer: markers,
-                                propertyName: 'perception',
+                                propertyName: 'nombre',
                                 marker: false,
                                 initial: false,
                                 moveToLocation: function(latlng, title, map) {
@@ -199,7 +210,7 @@ var globalMarkers;
                         }
 
 
-                    }, 3300);*/
+                    }, 3300);
 
 
                 },
