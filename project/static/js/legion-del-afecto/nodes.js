@@ -168,12 +168,12 @@ var idClasses = [1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 21, 16, 17, 0, 11, 15, 2
                     // map.addLayer(hondaMap);
 
 
-                    /*setTimeout(function(){
+                    setTimeout(function(){
                         if(!controlSearchIniatilized){
                             // codigo para implementar la barra de busqueda
                             globalSearchControl = new L.Control.Search({
-                                layer: markers,
-                                propertyName: 'perception',
+                                layer: nodesMap,
+                                propertyName: 'nombre_mpi',
                                 marker: false,
                                 initial: false,
                                 moveToLocation: function(latlng, title, map) {
@@ -189,20 +189,20 @@ var idClasses = [1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 21, 16, 17, 0, 11, 15, 2
                                     e.layer.openPopup();
                                 e.layer.on('popupclose', function (a) {
                                     // map.removeLayer(e.layer);
-                                    markers.refreshClusters();
+                                    // markers.refreshClusters();
 
                                 });
 
                             }).on('search:collapsed', function(e) {
                                 console.log('collapsed');
-                                markers.refreshClusters();
+                                // markers.refreshClusters();
                             });
                             map.addControl(globalSearchControl);  //inizialize search control
                             controlSearchIniatilized = true;
                         }
 
 
-                    }, 3300);*/
+                    }, 3300);
 
 
                 },

@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load cms_tags %}
+{% load staticfiles %}
+{% load sekizai_tags %}
+
+{% block title %}{% page_attribute "page_title" %}{% endblock title %}
+
+{#{% block css %}#}
+{##}
+{##}
+{#{% endblock css %}#}
+
+
+
+
+{% block content %}
+
+    {% addtoblock "css" %}
+        <link href="{% static "css/paro-1985/default.css" %}" rel="stylesheet">
+    {% endaddtoblock "css" %}
+    
+{% addtoblock "css" %}
+        <link href="{% static "css/paro-1985/demo.css" %}" rel="stylesheet">
+    {% endaddtoblock "css" %}
+    
+    {% addtoblock "css" %}
+        <link href="{% static "css/paro-1985/accordion.css" %}" rel="stylesheet">
+    {% endaddtoblock "css" %}
+    
+
+    {% addtoblock "css" %}
+        <link href="{% static "css/paro-1985/font-awesome.min.css" %}" rel="stylesheet">
+    {% endaddtoblock "css" %}
+    
+
+    {% addtoblock "css" %}
+        <link href="{% static "css/paro-1985/style.css" %}" rel="stylesheet">
+    {% endaddtoblock "css" %}
+    
+
+   <nav id="nav-paro-1985">
+
+
+</nav>
+<div class="demo2" id="demo2" style="width:800px;height:400px;"> <img src="images/medellin-map.jpg" class="imgMap"/>
+ <div id="content-demo2">
+
+ </div>
+ 
+
+
+</div>
+
+
+    
+
+
+    {% addtoblock "js" %}
+    
+<script src="{% static "js/paro-1985/data.js" %}"></script>
+{% endaddtoblock "js" %}
+
+
+    {% addtoblock "js" %}
+    
+<script src="{% static "js/paro-1985/accordion.js" %}"></script>
+{% endaddtoblock "js" %}
+
+
+    {% addtoblock "js" %}
+    
+<script src="{% static "js/paro-1985/craftmap.js" %}"></script>
+{% endaddtoblock "js" %}
+
+
+    {% addtoblock "js" %}
+    
+<script type="text/javascript">
+  $(function(){
+    $('.demo2').craftmap({
+      fullscreen: true,
+      image: {
+        width: 5380,
+        height: 2816
+      },
+      map: {
+        position: '1000 1500'
+      },
+      marker: {
+        name: 'marker', // (string) class name for a marker
+        center: true, // (bool) set true to pan the map to the center
+        popup: true, // (bool) set true to show a popup
+        popup_name: 'popup', // (string) class name for popup
+        onClick: function(marker, popup){},
+        onClose: function(marker, popup){}
+      }
+    });
+  });
+</script>
+{% endaddtoblock "js" %}
+
+
+
+
+{% endblock content %}
+
+
+
+{#{% block js %}#}
+{##}
+{#    #}
+{##}
+{#{% endblock js %}#}
