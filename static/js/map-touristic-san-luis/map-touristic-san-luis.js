@@ -88,8 +88,8 @@ layers.push(CartoDB_DarkMatter);
                 getGroups();
             });
 
-        //proj4.defs('EPSG:3116', '+proj=tmerc +lat_0=4.596200416666666 +lon_0=-74.07750791666666 +k=1 +x_0=1000000 +y_0=1000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
-        proj4.defs('EPSG:4326', '+title=WGS 84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees');
+        proj4.defs('EPSG:3116', '+proj=tmerc +lat_0=4.596200416666666 +lon_0=-74.07750791666666 +k=1 +x_0=1000000 +y_0=1000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
+        //proj4.defs('EPSG:4326', '+title=WGS 84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees');
 
         
         var opt = {
@@ -100,7 +100,7 @@ layers.push(CartoDB_DarkMatter);
   console.log( "Handler for .keypress() called." );
 });
         
-        function getGroups(){
+        function getSitios(){
             jQuery.ajax({
                 url:   url_data,
                 type:  'get',
@@ -120,7 +120,7 @@ layers.push(CartoDB_DarkMatter);
                     // }
                     
                    
-                    dataJson = JSON.stringify(gruposJson);
+                    dataJson = JSON.stringify(sitios);
                     dataJson = JSON.parse(dataJson);
                     console.log(dataJson);
 
@@ -137,8 +137,8 @@ layers.push(CartoDB_DarkMatter);
 //                        onEachFeature: eachSitio
 //                    }).addTo(map);
 
-                    var groupsMap = L.Proj.geoJson(dataJson,{
-                        onEachFeature: eachGroup
+                    var sitiosMap = L.Proj.geoJson(dataJson,{
+                        onEachFeature: eachSitio
                     });
 
                     // var hondaMap = L.Proj.geoJson(honda,{
@@ -160,7 +160,8 @@ layers.push(CartoDB_DarkMatter);
                      });
 
                     
-                    markers.addLayer(groupsMap);
+                    
+                    markers.addLayer(sitiosMap);
                     
                     map.addLayer(markers);
                     // map.addLayer(hondaMap);
@@ -180,7 +181,7 @@ layers.push(CartoDB_DarkMatter);
                             // codigo para implementar la barra de busqueda
                             globalSearchControl = new L.Control.Search({
                                 layer: markers,
-                                propertyName: 'nombre',
+                                propertyName: 'name',
                                 marker: false,
                                 initial: false,
                                 moveToLocation: function(latlng, title, map) {
@@ -223,7 +224,7 @@ layers.push(CartoDB_DarkMatter);
             });
         }
 
-        function eachGroup(feature, layer){
+        function eachSitio(feature, layer){
             numGroups++;
             if(layer != null){
                 // var lat = feature.geometry.coordinates[1];
@@ -240,19 +241,15 @@ layers.push(CartoDB_DarkMatter);
                     iconAnchor: [0, 39],
                     popupAnchor: [16, -20]
                 });
-                var title = '<h4>'+feature.geometry.properties.nombre.toUpperCase()+'</h4>';
+                var title = '<h4>'+feature.properties.name.toUpperCase()+'</h4>';
                 
                 var content = '<div class="content-info-marker">' + title +
                     '<ul>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span>'+' '+feature.geometry.coordinates[0]+' | '+feature.geometry.coordinates[1]+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span><b>No Integrantes: </b>'+' '+feature.geometry.properties.num_integrantes+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span><b>Comuna: </b>'+' '+feature.geometry.properties.id_comuna+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span><b>Telefono: </b>'+' '+feature.geometry.properties.telefono+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span><b>Email: </b>'+' '+feature.geometry.properties.email+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span><b>Dirección: </b>'+' '+feature.geometry.properties.direccion+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span><b>Facebook: </b>'+' '+feature.geometry.properties.facebook+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span><b>Actividades: </b>'+' '+feature.geometry.properties.actividades+'</span></li>' +
-                    '</ul>';
+                    '<li> <i class="fa fa-caret-right"></i> <span><b>Descripción: </b>'+' '+feature.properties.description+'</span></li>' +
+                    '</ul>' + 
+                    '<img src="'+feature.properties.image+'">'
+
+                    ;
                 
 
 
@@ -327,6 +324,6 @@ layers.push(CartoDB_DarkMatter);
 //             }
 //         };
 
-        getGroups();
+        getSitios();
 
 

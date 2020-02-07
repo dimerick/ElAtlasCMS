@@ -159,8 +159,7 @@ layers.push(CartoDB_DarkMatter);
                          }
                      });
 
-                    globalGroupsMap = groupsMap;
-                    globalMarkers = markers;
+                    
                     markers.addLayer(groupsMap);
                     
                     map.addLayer(markers);
