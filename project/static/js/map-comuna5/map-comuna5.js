@@ -245,13 +245,14 @@ layers.push(CartoDB_DarkMatter);
                 
                 var content = '<div class="content-info-marker">' + title +
                     '<ul>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span id="id"><b>No Integrantes: </b>'+' '+feature.geometry.properties.num_integrantes+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span id="id"><b>Comuna: </b>'+' '+feature.geometry.properties.id_comuna+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span id="id"><b>Telefono: </b>'+' '+feature.geometry.properties.telefono+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span id="id"><b>Email: </b>'+' '+feature.geometry.properties.email+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span id="id"><b>Dirección: </b>'+' '+feature.geometry.properties.direccion+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span id="id"><b>Facebook: </b>'+' '+feature.geometry.properties.facebook+'</span></li>' +
-                    '<li> <i class="fa fa-caret-right"></i> <span id="id"><b>Actividades: </b>'+' '+feature.geometry.properties.actividades+'</span></li>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span>'+' '+feature.geometry.coordinates[0]+' | '+feature.geometry.coordinates[1]+'</span></li>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span><b>No Integrantes: </b>'+' '+feature.geometry.properties.num_integrantes+'</span></li>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span><b>Comuna: </b>'+' '+feature.geometry.properties.id_comuna+'</span></li>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span><b>Telefono: </b>'+' '+feature.geometry.properties.telefono+'</span></li>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span><b>Email: </b>'+' '+feature.geometry.properties.email+'</span></li>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span><b>Dirección: </b>'+' '+feature.geometry.properties.direccion+'</span></li>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span><b>Facebook: </b>'+' '+feature.geometry.properties.facebook+'</span></li>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span><b>Actividades: </b>'+' '+feature.geometry.properties.actividades+'</span></li>' +
                     '</ul>';
                 
 
