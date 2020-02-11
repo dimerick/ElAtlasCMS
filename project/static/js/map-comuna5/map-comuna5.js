@@ -100,6 +100,41 @@ layers.push(CartoDB_DarkMatter);
   console.log( "Handler for .keypress() called." );
 });
         
+function getComuna5(){
+var comuna5Map = L.Proj.geoJson(comuna5,{
+                        onEachFeature: eachComuna5
+                    });
+map.addLayer(comuna5Map);
+
+}
+
+function getNetwork(){
+
+var dash_straight1 = {
+        color: '#f25f5c',
+        fillColor: '#f25f5c',
+        dashArray: 0,
+        opacity: 0.8,
+        weight: '3',
+    };
+
+    L.bezier({
+        path: [
+[{"lng":-75.573344361037, "lat": 6.27334973009 }, {"lng":-75.5751136, "lat": 6.2831388}],[{"lng":-75.574239045382, "lat":6.2836716184527 }, {"lng":-75.577456355095, "lat":6.2842901520802 }],
+[{"lng":-75.57763338089, "lat":6.2848580292889 }, {"lng":-75.576636940241, "lat":6.2850473215541 }],
+[{"lng":-75.575766563416, "lat":6.285599201427 }, {"lng":-75.573466569185, "lat":6.2866496378281}],
+[{"lng":-75.5858977, "lat":6.2880783}, {"lng":-75.570756196976, "lat":6.2901795151634}],[{"lng":-75.569474101067, "lat":6.2908140373998}, {"lng":-75.5674369, "lat":6.2906412}],[{"lng":-75.569044947624, "lat":6.2917551550886}, {"lng":-75.571839809418, "lat":6.2917684853553}],[{"lng":-75.5709437, "lat":6.2922379}, {"lng":-75.569565296173, "lat":6.2922137160645}],
+[{"lng":-75.5668415, "lat":6.2936189}, {"lng":-75.572049021721, "lat":6.2936267211779}],[{"lng":-75.575090646744, "lat":6.2956529104826}, {"lng":-75.5728743, "lat":6.2987183}],[{"lng":-75.56644320488, "lat":6.2993080293524}, {"lng":-75.5603757, "lat":6.2990224}],[{"lng":-75.5657351017, "lat":6.3039548719758}, {"lng":-75.558401942253, "lat":6.3066661774425}],
+[{"lng":-75.565016269684, "lat":6.3065702022698}, {"lng":-75.567223727703, "lat":6.3089306531508}],
+],
+
+        icon: {
+            path: '/static/images/icon-transparent.png'
+        }
+    }, dash_straight1).addTo(map);
+
+}
+
         function getGroups(){
             jQuery.ajax({
                 url:   url_data,
@@ -141,6 +176,9 @@ layers.push(CartoDB_DarkMatter);
                         onEachFeature: eachGroup
                     });
 
+                    
+
+
                     // var hondaMap = L.Proj.geoJson(honda,{
                     //     onEachFeature: eachHonda
                     // });
@@ -162,7 +200,8 @@ layers.push(CartoDB_DarkMatter);
                     
                     markers.addLayer(groupsMap);
                     
-                    map.addLayer(markers);
+                    map.addLayer(groupsMap);
+                    
                     // map.addLayer(hondaMap);
                     // map.addLayer(groupsMap);
 
@@ -179,7 +218,7 @@ layers.push(CartoDB_DarkMatter);
                         if(!controlSearchIniatilized){
                             // codigo para implementar la barra de busqueda
                             globalSearchControl = new L.Control.Search({
-                                layer: markers,
+                                layer: groupsMap,
                                 propertyName: 'nombre',
                                 marker: false,
                                 initial: false,
@@ -223,9 +262,44 @@ layers.push(CartoDB_DarkMatter);
             });
         }
 
+
+function eachComuna5(feature, layer){
+            if(layer != null){
+            // console.log(feature);
+            
+            var style1 = {
+                    fill: true,
+                    fillColor:'#22d6f1',
+                    fillOpacity: 1,
+                    color : '#fff',
+                    weight: 2
+                };
+
+
+            var title = '<h4>'+feature.properties.NOMBRE.toUpperCase()+'</h4>';
+                
+                var content = '<div class="content-info-marker">' + title +
+                    '<ul>' +
+
+                    '</ul>';
+                
+
+
+                content = content +'</div>';
+
+                layer.setStyle(style1);
+
+
+            layer.bindPopup(content, {maxWidth:300, minWidth: 200, maxHeight:300})
+        }
+        };
+
         function eachGroup(feature, layer){
             numGroups++;
             if(layer != null){
+
+                
+
                 // var lat = feature.geometry.coordinates[1];
                 // var lon = feature.geometry.coordinates[0];
 //                console.log(layer);
@@ -237,7 +311,7 @@ layers.push(CartoDB_DarkMatter);
                 var myIcon = L.icon({
                     iconUrl: urlIcon,
                     iconSize: [32, 39],
-                    iconAnchor: [0, 39],
+                    iconAnchor: [16, 35],
                     popupAnchor: [16, -20]
                 });
                 var title = '<h4>'+feature.geometry.properties.nombre.toUpperCase()+'</h4>';
@@ -327,6 +401,9 @@ layers.push(CartoDB_DarkMatter);
 //             }
 //         };
 
+        getComuna5();
         getGroups();
+        getNetwork();
+
 
 

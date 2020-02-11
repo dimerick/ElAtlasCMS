@@ -299,7 +299,7 @@ layers.push(CartoDB_DarkMatter);
             
 
 
-            var title = '<h4>'+feature.properties.nombre_mpi.toUpperCase()+'</h4>';
+            var title = '<h4>'+feature.properties.NOMBRE.toUpperCase()+'</h4>';
                 
                 var content = '<div class="content-info-marker">' + title +
                     '<ul>' +
