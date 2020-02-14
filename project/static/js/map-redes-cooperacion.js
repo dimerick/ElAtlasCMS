@@ -100,13 +100,25 @@ layers.push(CartoDB_DarkMatter);
 
         function getNetwork(){
 
-var dash_straight = {
-        color: 'rgb(145, 146, 150)',
-        fillColor: 'rgb(145, 146, 150)',
-        dashArray: 8,
+            var dash_straight = {
+        color: '#f25f5c',
+        fillColor: '#f25f5c',
+        dashArray: 0,
         opacity: 0.8,
-        weight: '5',
+        weight: '4',
     };
+
+
+var dash_straight2 = {
+        color: '#f6ae2d',
+        fillColor: '#f6ae2d',
+        dashArray: 0,
+        opacity: 0.8,
+        weight: '3',
+    };
+
+
+
 
 
         L.bezier({
@@ -149,13 +161,7 @@ var dash_straight = {
     }, dash_straight).addTo(map);
 
 
-var dash_straight2 = {
-        color: 'rgb(145, 146, 150)',
-        fillColor: 'rgb(145, 146, 150)',
-        dashArray: 8,
-        opacity: 0.5,
-        weight: '2',
-    };
+
 
 
         L.bezier({

@@ -96,20 +96,29 @@ layers.push(CartoDB_DarkMatter);
             'maxHeight' : 300
         };
 
-var antioquiaMap = L.Proj.geoJson(antioquia,{
-                        onEachFeature: eachAntioquia
-                    });
-map.addLayer(antioquiaMap);
+
 
         function getNetwork(){
 
-var dash_straight = {
-        color: 'rgb(145, 146, 150)',
-        fillColor: 'rgb(145, 146, 150)',
-        dashArray: 8,
+            var dash_straight = {
+        color: '#f25f5c',
+        fillColor: '#f25f5c',
+        dashArray: 0,
         opacity: 0.8,
-        weight: '5',
+        weight: '4',
     };
+
+
+var dash_straight2 = {
+        color: '#f6ae2d',
+        fillColor: '#f6ae2d',
+        dashArray: 0,
+        opacity: 0.8,
+        weight: '3',
+    };
+
+
+
 
 
         L.bezier({
@@ -118,8 +127,11 @@ var dash_straight = {
 [{"lng":-75.579897, "lat":6.315317}, {"lng":-75.579410, "lat":6.317390}],
 [{"lng":-75.648759, "lat":6.293240}, {"lng":-75.620968, "lat":6.255805}],
 [{"lng":-75.572615, "lat":6.280455}, {"lng":-75.573102, "lat":6.249598}],
-[{"lng":-75. 561489, "lat":6.256363}, {"lng":-75.566363, "lat":6.257418}],
-[{"lng":-75.563768, "lat":6.258703}, {"lng":-75.541188, "lat":6.237351}],[{"lng":-75.563768, "lat":6.258703}, {"lng":-75.554639, "lat":6.295187}],[{"lng":-75.563768, "lat":6.258703}, {"lng":-75.557719, "lat":6.247849}],[{"lng":-75.563768, "lat":6.258703}, {"lng":-75.564583, "lat":6.276571}],
+[{"lng":-75.561489, "lat":6.256363}, {"lng":-75.566363, "lat":6.257418}],
+[{"lng":-75.563768, "lat":6.258703}, {"lng":-75.541188, "lat":6.237351}],
+[{"lng":-75.563768, "lat":6.258703}, {"lng":-75.554639, "lat":6.295187}],
+[{"lng":-75.563768, "lat":6.258703}, {"lng":-75.557719, "lat":6.247849}],
+[{"lng":-75.563768, "lat":6.258703}, {"lng":-75.564583, "lat":6.276571}],
 [{"lng":-75.540389, "lat":6.340389}, {"lng":- 75.579904, "lat":6.283387}],
 [{"lng":-75.575593, "lat":6.313478}, {"lng":75.574936, "lat":6.312548}],
 [{"lng":-75.571973, "lat":6.343697}, {"lng":-75.570700, "lat":6.343767}],
@@ -149,13 +161,7 @@ var dash_straight = {
     }, dash_straight).addTo(map);
 
 
-var dash_straight2 = {
-        color: 'rgb(145, 146, 150)',
-        fillColor: 'rgb(145, 146, 150)',
-        dashArray: 8,
-        opacity: 0.5,
-        weight: '2',
-    };
+
 
 
         L.bezier({
@@ -368,6 +374,7 @@ var urlIcon = feature.properties.icon;
                 var title = '<h4>'+feature.properties.name.toUpperCase()+'</h4>';
                 var content = '<div class="content-info-marker">' + title +
                     '<ul>' +
+                    '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.coords[0]+' | '+feature.properties.coords[1]+'</span></li>' +
                     '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.category+'</span></li>' +
                     '<li> <i class="fa fa-caret-right"></i> <span id="id">'+' '+feature.properties.description+'</span></li>' +
                     '</ul>';
