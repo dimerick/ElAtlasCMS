@@ -286,14 +286,14 @@ var dash_straight2 = {
                     //     onEachFeature: eachHonda
                     // });
 //
-                     var markers = L.markerClusterGroup({
-                         iconCreateFunction: function(cluster) {
-                             return L.divIcon({ html: '<div class="icon-map"><div>' + cluster.getChildCount() + '</div></div>' });
-                         }
-                     });
+                     // var markers = L.markerClusterGroup({
+                     //     iconCreateFunction: function(cluster) {
+                     //         return L.divIcon({ html: '<div class="icon-map"><div>' + cluster.getChildCount() + '</div></div>' });
+                     //     }
+                     // });
 
                     
-                    markers.addLayer(groupsMap);
+                    //markers.addLayer(groupsMap);
                     map.addLayer(groupsMap);
 
 
@@ -306,7 +306,7 @@ var dash_straight2 = {
                         if(!controlSearchIniatilized){
                             // codigo para implementar la barra de busqueda
                             globalSearchControl = new L.Control.Search({
-                                layer: markers,
+                                layer: groupsMap,
                                 propertyName: 'name',
                                 marker: false,
                                 initial: false,
@@ -357,17 +357,27 @@ var dash_straight2 = {
                 // var lon = feature.geometry.coordinates[0];
 //                console.log(layer);
 
-var urlIcon = '/static/images/map-icon-red.png';
-if (feature.properties.icon != null){
-var urlIcon = feature.properties.icon;
-}
+// var urlIcon = '/static/images/map-icon-red.png';
+// if (feature.properties.icon != null){
+// var urlIcon = feature.properties.icon;
+// }
 
-                var myIcon = L.icon({
-                    iconUrl: urlIcon,
-                    iconSize: [32, 39],
-                    iconAnchor: [16, 39],
-                    popupAnchor: [16, -20]
-                });
+//                 var myIcon = L.icon({
+//                     iconUrl: urlIcon,
+//                     iconSize: [32, 39],
+//                     iconAnchor: [16, 39],
+//                     popupAnchor: [16, -20]
+//                 });
+
+var size = 15;
+
+    var myIcon = L.divIcon({
+          className: "div-icon color3",
+          //html: feature.properties.level,
+          iconSize: [size, size],
+          iconAnchor: [size/2, size/2]
+
+        });
 
 
 

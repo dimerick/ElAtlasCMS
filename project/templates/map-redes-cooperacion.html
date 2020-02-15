@@ -94,7 +94,12 @@
 
 
  {% addtoblock "js" %}
- <script src="{% static "js/map-redes-cooperacion.js" %}"></script>
+ <script src="{% static "js/map-redes-cooperacion/data.js" %}"></script>
+{% endaddtoblock "js" %}
+
+
+ {% addtoblock "js" %}
+ <script src="{% static "js/map-redes-cooperacion/map-redes-cooperacion.js" %}"></script>
 {% endaddtoblock "js" %}
 
 
