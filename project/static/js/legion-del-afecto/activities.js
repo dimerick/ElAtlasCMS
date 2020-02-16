@@ -53,8 +53,8 @@ layers.push(CartoDB_DarkMatter);
 
         // L.control.iconL
         var map = L.map('map', {
-            center: [6.2552985, -75.6078625],
-            zoom: 11,
+            center: [5.856474565300485, -73.53149414062501],
+            zoom: 6,
             maxZoom: 18,
             minZoom: 3,
             // layers: [openStreet, esriWorldImagery],
@@ -299,7 +299,7 @@ layers.push(CartoDB_DarkMatter);
             
 
 
-            var title = '<h4>'+feature.properties.NOMBRE.toUpperCase()+'</h4>';
+            var title = '<h4>'+feature.properties.nombre_mpi.toUpperCase()+'</h4>';
                 
                 var content = '<div class="content-info-marker">' + title +
                     '<ul>' +

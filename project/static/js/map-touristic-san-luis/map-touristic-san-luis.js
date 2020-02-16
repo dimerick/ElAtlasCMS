@@ -42,7 +42,7 @@ layers.push(CartoDB_DarkMatter);
 
         // L.control.iconL
         var map = L.map('map', {
-            center: [6.2552985, -75.6078625],
+            center: [6.090032158646045, -74.92229461669923],
             zoom: 11,
             maxZoom: 18,
             minZoom: 3,

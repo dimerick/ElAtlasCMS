@@ -42,7 +42,7 @@ layers.push(CartoDB_DarkMatter);
 
         // L.control.iconL
         var map = L.map('map', {
-            center: [6.2552985, -75.6078625],
+            center: [6.25387182486021, -75.56156158447267],
             zoom: 11,
             maxZoom: 18,
             minZoom: 3,
@@ -110,8 +110,8 @@ layers.push(CartoDB_DarkMatter);
 
 
 var dash_straight2 = {
-        color: '#f6ae2d',
-        fillColor: '#f6ae2d',
+        color: '#007bff',
+        fillColor: '#007bff',
         dashArray: 0,
         opacity: 0.8,
         weight: '3',

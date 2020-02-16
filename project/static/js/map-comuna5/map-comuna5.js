@@ -42,8 +42,8 @@ layers.push(CartoDB_DarkMatter);
 
         // L.control.iconL
         var map = L.map('map', {
-            center: [6.2552985, -75.6078625],
-            zoom: 11,
+            center: [6.292605625415022, -75.56078910827638],
+            zoom: 13,
             maxZoom: 18,
             minZoom: 3,
             // layers: [openStreet, esriWorldImagery],

@@ -43,7 +43,7 @@ margin-left: 5px!important;
   background-color: #247BA0;
   /*background: radial-gradient(at top left, #247BA0 20%, #000000);*/
 }.color31{
-  background-color: #4a71ab;
+  background-color: #f2ee00;
   /*background: radial-gradient(at top left, #247BA0 20%, #000000);*/
 }
 .color4{
@@ -142,4 +142,7 @@ margin-left: 5px!important;
 .color18{
   background-color: #22d6f1;
   background: radial-gradient(at top left, #1ebbd4 20%, #000000);
+}
+#img-search-map{
+margin-left: 10px;
 }

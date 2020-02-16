@@ -85,13 +85,17 @@
 {% endaddtoblock "js" %}
 
 {% addtoblock "js" %}
- <script src="{% static "js/data.js" %}"></script>
+<script src="{% static "js/snap.svg.js" %}"></script>
 {% endaddtoblock "js" %}
+
+{% addtoblock "js" %}
+<script src="{% static "js/leaflet.bezier.js" %}"></script>
+{% endaddtoblock "js" %}
+
 
  {% addtoblock "js" %}
- <script src="{% static "js/map-main-actors.js" %}"></script>
+ <script src="{% static "js/map-redes-casa-mia/map-redes-casa-mia.js" %}"></script>
 {% endaddtoblock "js" %}
-
 
 {% endblock content %}
 
