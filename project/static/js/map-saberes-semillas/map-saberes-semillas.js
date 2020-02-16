@@ -12,6 +12,18 @@ var globalMarkers;
 //        var crs3116 = new L.Proj.CRS('EPSG:3116',
 //            '+proj=tmerc +lat_0=4.596200416666666 +lon_0=-74.07750791666666 +k=1 +x_0=1000000 +y_0=1000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
 
+
+ CartoDB_DarkMatter = 
+        {
+
+            title: 'CartoDB DarkMatter',
+            icon: '/static/images/carto_dark.png',
+            layer: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'    
+            })
+};
+layers.push(CartoDB_DarkMatter);
+
         openStreet = {
             title: 'Osm',
             icon: '/media/filer_public/32/7d/327dff9d-a8b9-4ded-8208-a48df14a8742/openstreetmap.png',
@@ -29,16 +41,7 @@ var globalMarkers;
         };
         layers.push(esriWorldImagery);
 
-        CartoDB_DarkMatter = 
-        {
-
-            title: 'CartoDB DarkMatter',
-            icon: '/static/images/carto_dark.png',
-            layer: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'    
-            })
-};
-layers.push(CartoDB_DarkMatter);
+       
 
         // L.control.iconL
         var map = L.map('map', {
