@@ -24,22 +24,22 @@ var globalMarkers;
 };
 layers.push(CartoDB_DarkMatter);
 
-        openStreet = {
-            title: 'Osm',
-            icon: '/media/filer_public/32/7d/327dff9d-a8b9-4ded-8208-a48df14a8742/openstreetmap.png',
-            layer: L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            })
-        };
-        layers.push(openStreet);
-        esriWorldImagery = {
-            title: 'World Imagery',
-            icon: '/media/filer_public/1b/32/1b32d17c-1901-4615-88ad-bd7c942b9b32/satellite.png',
-            layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-            })
-        };
-        layers.push(esriWorldImagery);
+        // openStreet = {
+        //     title: 'Osm',
+        //     icon: '/media/filer_public/32/7d/327dff9d-a8b9-4ded-8208-a48df14a8742/openstreetmap.png',
+        //     layer: L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        //         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        //     })
+        // };
+        // layers.push(openStreet);
+        // esriWorldImagery = {
+        //     title: 'World Imagery',
+        //     icon: '/media/filer_public/1b/32/1b32d17c-1901-4615-88ad-bd7c942b9b32/satellite.png',
+        //     layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        //         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        //     })
+        // };
+        // layers.push(esriWorldImagery);
 
        
 

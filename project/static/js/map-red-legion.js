@@ -12,22 +12,22 @@ var globalMarkers;
 //        var crs3116 = new L.Proj.CRS('EPSG:3116',
 //            '+proj=tmerc +lat_0=4.596200416666666 +lon_0=-74.07750791666666 +k=1 +x_0=1000000 +y_0=1000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
 
-        openStreet = {
-            title: 'Osm',
-            icon: '/media/filer_public/32/7d/327dff9d-a8b9-4ded-8208-a48df14a8742/openstreetmap.png',
-            layer: L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            })
-        };
-        layers.push(openStreet);
-        esriWorldImagery = {
-            title: 'World Imagery',
-            icon: '/media/filer_public/1b/32/1b32d17c-1901-4615-88ad-bd7c942b9b32/satellite.png',
-            layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-            })
-        };
-        layers.push(esriWorldImagery);
+        // openStreet = {
+        //     title: 'Osm',
+        //     icon: '/media/filer_public/32/7d/327dff9d-a8b9-4ded-8208-a48df14a8742/openstreetmap.png',
+        //     layer: L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        //         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        //     })
+        // };
+        // layers.push(openStreet);
+        // esriWorldImagery = {
+        //     title: 'World Imagery',
+        //     icon: '/media/filer_public/1b/32/1b32d17c-1901-4615-88ad-bd7c942b9b32/satellite.png',
+        //     layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        //         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        //     })
+        // };
+        // layers.push(esriWorldImagery);
 
         CartoDB_DarkMatter = 
         {
@@ -104,11 +104,11 @@ map.addLayer(colombiaMap);
         function getNetwork(){
 
 var dash_straight = {
-        color: 'rgb(145, 146, 150)',
-        fillColor: 'rgb(145, 146, 150)',
-        dashArray: 8,
+        color: '#f25f5c',
+        fillColor: '#f25f5c',
+        dashArray: 0,
         opacity: 0.8,
-        weight: '5',
+        weight: '4',
     };
 
 
@@ -227,9 +227,7 @@ var dash_straight = {
                         onEachFeature: eachGroup
                     });
 
-                    var hondaMap = L.Proj.geoJson(honda,{
-                        onEachFeature: eachHonda
-                    });
+                    
 
 
                     // var hondaMap = L.Proj.geoJson(honda,{
@@ -246,7 +244,6 @@ var dash_straight = {
                     globalMarkers = markers;
                     markers.addLayer(groupsMap);
                     map.addLayer(groupsMap);
-                    map.addLayer(hondaMap);
 
 
                     //Add lines to Map
@@ -339,13 +336,15 @@ if (feature.properties.icon != null){
 var urlIcon = feature.properties.icon;
 }
 
-                var myIcon = L.icon({
-                    iconUrl: urlIcon,
-                    iconSize: [32, 39],
-                    iconAnchor: [16, 39],
-                    popupAnchor: [16, -20]
-                });
+                var size = 15;
 
+    var myIcon = L.divIcon({
+          className: "div-icon color31",
+          //html: feature.properties.level,
+          iconSize: [size, size],
+          iconAnchor: [size/2, size/2]
+
+        });
 
 
                 var title = '<h4>'+feature.properties.name.toUpperCase()+'</h4>';
@@ -409,13 +408,13 @@ function eachHonda(feature, layer){
             fill: false,
             fillColor:'#f0e428',
             fillOpacity: 1.0,
-            color : '#59abd5',
+            color : '#50514f',
             weight: 3
             };
 
             //L.Util.setOptions(layer, { style: styleG2 });
 
-                var title = '<h4>Antioquia</h4>';
+                var title = '<h4>Colombia</h4>';
                 var content = '<div class="content-info-marker">' + title;
                     
                 
