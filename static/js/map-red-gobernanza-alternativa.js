@@ -152,7 +152,7 @@ var dash_straight5 = {
 ],
 
         icon: {
-            path: '/static/images/icon-transparent.png'
+            path: '/static/images/point2.png'
         }
     }, dash_straight2).addTo(map);
 
@@ -166,7 +166,7 @@ var dash_straight5 = {
 ],
 
         icon: {
-            path: '/static/images/icon-transparent.png'
+            path: '/static/images/point2.png'
         }
     }, dash_straight1).addTo(map);
 
@@ -181,7 +181,7 @@ L.bezier({
 ],
 
         icon: {
-            path: '/static/images/icon-transparent.png'
+            path: '/static/images/point2.png'
         }
     }, dash_straight2).addTo(map);
 
@@ -196,7 +196,7 @@ L.bezier({
 ],
 
         icon: {
-            path: '/static/images/icon-transparent.png'
+            path: '/static/images/point2.png'
         }
     }, dash_straight3).addTo(map);
 
@@ -216,7 +216,7 @@ L.bezier({
 ],
 
         icon: {
-            path: '/static/images/icon-transparent.png'
+            path: '/static/images/point2.png'
         }
     }, dash_straight4).addTo(map);
 
@@ -236,7 +236,7 @@ L.bezier({
 ],
 
         icon: {
-            path: '/static/images/icon-transparent.png'
+            path: '/static/images/point2.png'
         }
     }, dash_straight5).addTo(map);
 
