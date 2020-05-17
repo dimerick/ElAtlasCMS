@@ -244,7 +244,7 @@ var dash_straight2 = {
 
 
                 
-        function getCalles(){
+        function getPuntos(){
             jQuery.ajax({
                 url:   url_data,
                 type:  'get',
@@ -259,13 +259,13 @@ var dash_straight2 = {
                     
                     
                    
-                    dataJson = JSON.stringify(calles);
+                    dataJson = JSON.stringify(sectoressantander);
                     dataJson = JSON.parse(dataJson);
                     
 
 
-                    var callesMap = L.Proj.geoJson(dataJson,{
-                        onEachFeature: eachCalle
+                    var sectoresMap = L.Proj.geoJson(dataJson,{
+                        onEachFeature: eachSector
                     });
 
                     
@@ -290,12 +290,9 @@ var dash_straight2 = {
                     
                     map.addLayer(santanderMap);
 
-                    map.addLayer(callesMap);
+                    map.addLayer(sectoresMap);
 
-                    var dialog = L.control.dialog({size: [300, 300], position: 'topright', anchor[0, 0], initOpen: true})
-                    .setContent("<p>Mapa para la priorización del acompañamiento solidario a la comunidad del Barrio Santander. </br>Este mapa ha sido dividido por sectores y cuadras en aras de facilitar la coordinación estratégica entre líderes comunitarios, grupos de base y entidades gubernamentales.</p>")
-                    .addTo(map);
-
+                    
                     
                     //dialog.setLocation([0, 0]);
 
@@ -308,8 +305,8 @@ var dash_straight2 = {
                         if(!controlSearchIniatilized){
                             // codigo para implementar la barra de busqueda
                             globalSearchControl = new L.Control.Search({
-                                layer: callesMap,
-                                propertyName: 'sector',
+                                layer: sectoresMap,
+                                propertyName: 'nombre',
                                 marker: false,
                                 initial: false,
                                 moveToLocation: function(latlng, title, map) {
@@ -354,9 +351,20 @@ var dash_straight2 = {
         }
 
         
-function eachCalle(feature, layer){
+function eachSector(feature, layer){
             if(layer != null){
             // console.log(feature);
+
+                          var size = 15;
+
+    var myIcon = L.divIcon({
+          className: "div-icon color31-a",
+          //html: feature.properties.level,
+          iconSize: [size, size],
+          iconAnchor: [size/2, size/2]
+
+        });
+
             
             var style1 = {
                     fill: true,
@@ -367,7 +375,7 @@ function eachCalle(feature, layer){
                 };
 
 
-            var title = '<h4>'+feature.properties.sector.toUpperCase()+'</h4>';
+            var title = '<h4>'+feature.properties.nombre.toUpperCase()+'</h4>';
                 
                 var content = '<div class="content-info-marker">' + title +
                     '<ul>' +
@@ -378,7 +386,7 @@ function eachCalle(feature, layer){
 
                 content = content +'</div>';
 
-                layer.setStyle(style1);
+                layer.setIcon(myIcon);
 
 
             layer.bindPopup(content, {maxWidth:300, minWidth: 200, maxHeight:300})
@@ -420,7 +428,7 @@ function eachSantander(feature, layer){
         };
 
 
-getCalles();
+getPuntos();
 
 
 
