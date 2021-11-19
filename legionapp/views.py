@@ -6,14 +6,7 @@ from django.contrib.gis.geos import GEOSGeometry
 from django.core.serializers import serialize
 from django.db import connection #para ejecutar RAW queries
 from django.db.models import Q
-
-def ireplace(old, new, text):
-    """ 
-    Replace case insensitive
-    Raises ValueError if string not found
-    """
-    index_l = text.lower().index(old.lower())
-    return text[:index_l] + new + text[index_l + len(old):] 
+import re
 
 def get_documento(request):
     key_word = request.GET['key_word']
@@ -23,8 +16,12 @@ def get_documento(request):
         docs_query = Documento.objects.filter(Q(titulo__icontains=key_word) | Q(texto__icontains=key_word))
         docs = []
         for doc in docs_query:
-            doc.titulo = ireplace(key_word, f"<span style=\"background-color:yellow;font-weight:bold\">{key_word}</span>", doc.titulo)
-            doc.texto = ireplace(key_word, f"<span style=\"background-color:yellow;font-weight:bold\">{key_word}</span>", doc.texto)
+            #doc.titulo = ireplace(key_word, f"<span style=\"background-color:yellow;font-weight:bold\">{key_word}</span>", doc.titulo)
+            doc.titulo = re.sub(key_word, f"<span style='background-color:yellow;font-weight:bold'>{key_word}</span>", doc.titulo, flags=re.IGNORECASE)
+            
+            doc.texto = re.sub(key_word, f"<span style='background-color:yellow;font-weight:bold'>{key_word}</span>", doc.texto, flags=re.IGNORECASE)
+            #doc.texto = ireplace(key_word, f"<span style=\"background-color:yellow;font-weight:bold\">{key_word}</span>", doc.texto)
+            
             docs.append({"titulo": doc.titulo, "fecha": doc.fecha, "autor": doc.autor, "tipo": doc.tipo.nombre, "texto": doc.texto})
 
         dict_data = {"data": docs}
