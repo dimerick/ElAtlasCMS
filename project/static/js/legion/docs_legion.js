@@ -1,4 +1,4 @@
-var url_data = 'http://localhost:8000/es/legion/documento/';
+var url_data = '/legion/documento/';
 
 jQuery(document).on('click','.cmsms_tabs_list_item',function(){
     console.log(jQuery(this).attr("id"));
