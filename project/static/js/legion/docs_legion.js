@@ -1,15 +1,24 @@
 var url_data = 'http://localhost:8000/es/legion/documento/';
 
-// jQuery(".cmsms_tabs_list_item").click(function() {
-//     console.log(jQuery(this).attr("id"));
-//   });
-
-  jQuery(".cmsms_tabs_list_item").on('click', function(event){
+jQuery(document).on('click','.cmsms_tabs_list_item',function(){
     console.log(jQuery(this).attr("id"));
+    var num = jQuery(this).attr("id").replace("cmsms_tabs_list_item_", "");
+    jQuery(".cmsms_tabs_list_item.current_tab").removeClass("current_tab");
+    jQuery(this).addClass("current_tab");
+    var tabActive = jQuery(".cmsms_tab.active_tab");
+    tabActive.removeClass("active_tab");
+    tabActive.attr("style", "display: none;");
 
+    var tabActiveNew = jQuery("#cmsms_tab_"+num);
+    tabActiveNew.addClass("active_tab");
+    tabActiveNew.attr("style", "display: block;");
+
+    console.log(num);
+//alert("Has dado clic en tab");
 });
 
 jQuery("#button-search").click(function () {
+    //alert("Has dado clic");
     var key_word = jQuery("#input-search-doc").val();
     //alert("Busqueda: " + key_word);
 
@@ -43,7 +52,7 @@ jQuery("#button-search").click(function () {
                                 <b>Titulo: </b>${val.titulo}<br/>
                                 <b>Fecha: </b>${val.fecha}<br/>
                                 <b>Autor: </b>${val.autor}<br/>
-                                <b>Autor: </b>${val.tipo}<br/>
+                                <b>Tipo: </b>${val.tipo}<br/>
                                 </p>
                                 <p>
                                 ${val.texto.replace(/\n/g, "<br />")}

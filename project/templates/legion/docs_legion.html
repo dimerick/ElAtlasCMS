@@ -14,14 +14,28 @@
 {% addtoblock "css" %}
 <link href="{% static " css/leaflet.css" %}" rel="stylesheet">
 {% endaddtoblock "css" %}
+
+{% addtoblock "css" %}
+<style>
+#options-search{
+    padding-bottom: 60px;
+}
+
+</style>
+{% endaddtoblock "css" %}
 <br />
 <br />
 <div class="col-md-4 offset-md-1">
+
+    <div id="options-search">
     <div id="img-search-map"></div>
     <label for="input-search-doc">Ingrese la palabra clave</label>
     <input type="text" id="input-search-doc">
     <button id="button-search">Buscar</button>
 
+</div>
+
+    
     <div class="cmsms_row_outer">
 
         <div class="cmsms_row_inner">
